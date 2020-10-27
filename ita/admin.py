@@ -29,12 +29,14 @@ admin.site.register(Rate,RateAdmin)
 
 admin.site.register(RateStatus)
 class RateResultAdmin(admin.ModelAdmin): 
-    list_display = ('rate','rate_status','score','user','tester','created_at') 
-    list_filter = ('rate','agency')
-    search_fields = ['name']
+    autocomplete_fields = ['rate','agency']  
+    list_display = ('number','rate','rate_status','register_type','urls','agency','score','tester','passing','created_at') 
+    list_filter = ('rate','agency','rate__year','passing')
+    search_fields = ['rate__number','rate__name']
 admin.site.register(RateResult,RateResultAdmin)
 
 class UserAdmin(admin.ModelAdmin): 
+    autocomplete_fields = ['agency','user']  
     list_display = ('full_name','agency','register_type','status') 
     list_filter = ('agency',)
     search_fields = ['full_name']

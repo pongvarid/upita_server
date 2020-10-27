@@ -1,9 +1,15 @@
-from django.urls import path
- 
+from rest_framework.routers import SimpleRouter
+from ita import views
 
 
-urlpatterns = [
-    # path("gps/", GPSCreateAPIView.as_view(), name='gps-list'),
-    # path("gps/<int:pk>", GPSDetailAPIView.as_view(), name='gps-detail'),
-    
-]
+router = SimpleRouter()
+
+router.register(r'agencytype', views.AgencyTypeViewSet)
+router.register(r'agency', views.AgencyViewSet)
+router.register(r'year', views.YearViewSet)
+router.register(r'rate', views.RateViewSet)
+router.register(r'ratestatus', views.RateStatusViewSet)
+router.register(r'rateresult', views.RateResultViewSet)
+router.register(r'profile', views.ProfileViewSet)
+
+urlpatterns = router.urls
