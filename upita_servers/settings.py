@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'upita',
         'USER': 'root',
         # 'PASSWORD': 'P@$$w0rd1234',
-        'PASSWORD': '1234',
+        # 'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

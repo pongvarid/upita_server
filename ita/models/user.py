@@ -8,7 +8,9 @@ class Profile(models.Model):
         verbose_name = _("ผู้ใช้")
         verbose_name_plural = _("ผู้ใช้") 
     ANSWERS = (
-        ('office365','office365'),
+        ('microsoft.com','microsoft.com'),
+        ('google.com','google.com'),
+         ('facebook.com','facebook.com'),
         ('ปกติ', 'ปกติ'), 
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE) 
