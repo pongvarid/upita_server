@@ -1,0 +1,28 @@
+from django.conf.urls import include, url
+from ita.apiv2 import views
+
+
+urlpatterns = [
+
+  url(r'^agencytype/(?P<id>[0-9]+)/$', views.AgencyTypeAPIView.as_view()),
+  url(r'^agencytype/$', views.AgencyTypeAPIListView.as_view()),
+
+  url(r'^agency/(?P<id>[0-9]+)/$', views.AgencyAPIView.as_view()),
+  url(r'^agency/$', views.AgencyAPIListView.as_view()),
+
+  url(r'^year/(?P<id>[0-9]+)/$', views.YearAPIView.as_view()),
+  url(r'^year/$', views.YearAPIListView.as_view()),
+
+  url(r'^rate/(?P<id>[0-9]+)/$', views.RateAPIView.as_view()),
+  url(r'^rate/$', views.RateAPIListView.as_view()),
+
+  url(r'^ratestatus/(?P<id>[0-9]+)/$', views.RateStatusAPIView.as_view()),
+  url(r'^ratestatus/$', views.RateStatusAPIListView.as_view()),
+
+  url(r'^rateresult/(?P<id>[0-9]+)/$', views.RateResultAPIView.as_view()),
+  url(r'^rateresult/$', views.RateResultAPIListView.as_view()),
+
+  url(r'^profile/(?P<id>[0-9]+)/$', views.ProfileAPIView.as_view()),
+  url(r'^profile/$', views.ProfileAPIListView.as_view()),
+
+]

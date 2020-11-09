@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'upita',
         'USER': 'root',
-        # 'PASSWORD': 'P@$$w0rd1234',
+        'PASSWORD': 'P@$$w0rd1234',
         # 'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',

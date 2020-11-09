@@ -9,6 +9,7 @@ class Year(models.Model):
         verbose_name = _("ปีการศึกษา")
         verbose_name_plural = _("ปีการศึกษา") 
     year = models.CharField(max_length=255)
+    status = models.BooleanField(default=False,verbose_name="ปิดการใช้งาน")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
