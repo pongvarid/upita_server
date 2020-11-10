@@ -24,8 +24,9 @@ class AgencyViewSet(ModelViewSet):
 class AgencyList(generics.ListAPIView):
     queryset = Agency.objects.all() 
     serializer_class = AgencySerializer
-    filter_backends = (DjangoFilterBackend, )
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter)
     filterset_fields = ['agency_type',]
+    search_fields = ['name',]
 
 class YearViewSet(ModelViewSet):
     queryset = Year.objects.order_by('pk')
@@ -45,6 +46,8 @@ class RateStatusViewSet(ModelViewSet):
 class RateResultViewSet(ModelViewSet):
     queryset = RateResult.objects.order_by('pk')
     serializer_class = RateResultSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['rate__year','agency'] 
 
 
 class ProfileViewSet(ModelViewSet):

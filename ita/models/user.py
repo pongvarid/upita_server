@@ -17,7 +17,8 @@ class Profile(models.Model):
     register_type = models.CharField(max_length=255,choices=ANSWERS)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     passing = models.BooleanField(default=False,verbose_name="หัวหน้าหน่วยงาน")
-    status = models.BooleanField(default=False,verbose_name="ปิดการใช้งาน")
+    status = models.BooleanField(default=True,verbose_name="เปิดการใช้งาน")
+    in_up = models.BooleanField(default=False,verbose_name="บุลคากรภายใน")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

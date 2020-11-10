@@ -1,7 +1,7 @@
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from ita.apiv2.serializers import AgencyTypeSerializer, AgencySerializer, YearSerializer, RateSerializer, RateStatusSerializer, RateResultSerializer, ProfileSerializer,UserDetailsSerializer
+from ita.apiv2.serializers import AgencyTypeSerializer, AgencySerializer,ProfileDashboardSerializer, YearSerializer, RateResultViewSerializer,RateSerializer, RateStatusSerializer, RateResultSerializer, ProfileSerializer,UserDetailsSerializer
 from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile
 from django.contrib.auth.models import User
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
@@ -272,6 +272,16 @@ class RateResultAPIView(APIView):
         return Response(status=204)
 
 
+class RateResultPassingAPIListView(APIView):
+    def put(self, request,pk, format=None):
+        user = User.objects.get(id=request.data['user_passing']) 
+        items = RateResult.objects.get(pk=pk)
+        items.user_passing = user
+        items.passing = request.data['passing']
+        items.save()  
+        serializer = RateResultSerializer(items)
+        return Response(serializer.data)
+
 class RateResultAPIListView(APIView):
 
     def get(self, request, format=None):
@@ -292,7 +302,7 @@ class RateResultAPIListView(APIView):
     def put(self, request, format=None):
         try: 
             items = RateResult.objects.get(agency=request.data['agency'],rate=request.data['rate'])
-            serializer = RateResultSerializer(items)
+            serializer = RateResultViewSerializer(items)
             return Response(serializer.data, status=201)
         except :
             return Response(None, status=201)
@@ -375,3 +385,26 @@ class UserDetailsView(RetrieveUpdateAPIView):
         https://github.com/Tivix/django-rest-auth/issues/275
         """
         return get_user_model().objects.none()
+
+class Dashbord(APIView):
+
+    def get(self, request,pk, format=None):
+        user = Profile.objects.get(pk=pk)
+        agency = Agency.objects.get(pk=user.agency_id)
+        profile = Profile.objects.filter(agency__id=agency.id,passing=False)
+        passing = Profile.objects.filter(agency__id=agency.id,passing=True)
+        response = {
+            "agency":agency.name,
+            "agency_user": len(profile),
+            "agency_passing": len(passing),
+            "agency_user_all": ProfileDashboardSerializer(profile,many=True).data,
+            "agency_passing_all" :ProfileDashboardSerializer(passing,many=True).data 
+        } 
+         
+        return Response(response)
+
+    def post(self, request, format=None):
+        user = User.objects.get(username=request.data['username']) 
+        if user.id:
+            return Response({"user":user.id} , status=201)
+        return Response({"have":False} , status=400)

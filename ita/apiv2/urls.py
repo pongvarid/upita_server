@@ -26,5 +26,8 @@ urlpatterns = [
   url(r'^check/$', views.LoginPermission.as_view()),
   url(r'^profile/(?P<id>[0-9]+)/$', views.ProfileAPIView.as_view()),
   url(r'^profile/$', views.ProfileAPIListView.as_view()),
-  url(r'^agencys/$', views1.AgencyList.as_view(), name='agency-all')
+  url(r'^agencys/$', views1.AgencyList.as_view(), name='agency-all'),
+  url(r'^passing/(?P<pk>[0-9]+)/$', views.RateResultPassingAPIListView.as_view(), name='RateResultPassingAPIListView-all'),  
+  url(r'^dashboard/(?P<pk>[0-9]+)/$', views.Dashbord.as_view(), name='RateResultPassingAPIListView-all')  
+
 ]
