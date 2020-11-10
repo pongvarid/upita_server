@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from ita.apiv2 import views
+from ita.api import views as views1
 
 
 urlpatterns = [
@@ -21,8 +22,9 @@ urlpatterns = [
 
   url(r'^rateresult/(?P<id>[0-9]+)/$', views.RateResultAPIView.as_view()),
   url(r'^rateresult/$', views.RateResultAPIListView.as_view()),
-
+  url(r'^user/$', views.UserDetailsView.as_view()),
+  url(r'^check/$', views.LoginPermission.as_view()),
   url(r'^profile/(?P<id>[0-9]+)/$', views.ProfileAPIView.as_view()),
   url(r'^profile/$', views.ProfileAPIListView.as_view()),
-
+  url(r'^agencys/$', views1.AgencyList.as_view(), name='agency-all')
 ]

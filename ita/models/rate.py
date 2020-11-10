@@ -20,7 +20,7 @@ class Rate(models.Model):
         verbose_name = _("ประเด็นการตรวจสอบ")
         verbose_name_plural = _("ประเด็นการตรวจสอบ") 
     number = models.IntegerField(default=0,verbose_name="ข้อ")
-    year = models.ForeignKey(Year, on_delete=models.CASCADE,verbose_name="ปีการศึกษา")
+    year = models.ForeignKey(Year, on_delete=models.CASCADE,verbose_name="ประจำปี")
     name = models.CharField(max_length=255,verbose_name="หัวข้อ")
     detail = models.TextField(verbose_name="รายระเอียด") 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,7 +56,11 @@ class RateResult(models.Model):
     urls = models.TextField(blank=True, null=True )  
     register_type = models.CharField(max_length=255,choices=ANSWERS,blank=True, null=True,verbose_name="สถานะการส่ง")
     comment = models.TextField(blank=True, null=True ,verbose_name="ความคิดเห็น")
+    user_passing = models.ForeignKey(User, on_delete=models.CASCADE,related_name="user_admin",blank=True, null=True,verbose_name="หัวหน้าหน่วยงาน") 
     passing = models.BooleanField(default=False ,verbose_name="การอนุญาตจากหัวหน้าหน่วยงาน") 
+    ref = models.TextField(blank=True, null=True,verbose_name="หมายเหตุ")  
+    name = models.TextField(blank=True, null=True,verbose_name="หัวข้อ")  
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):

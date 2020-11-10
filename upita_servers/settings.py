@@ -26,7 +26,7 @@ SECRET_KEY = 'byjn@0y2kq_8ia3-q@%+e3ytkpqu12=n=zm^tocmwd8umin=(2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.1.112"]
 
 
 # Application definition
@@ -40,11 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'rest_framework',
+    'rest_framework.authtoken',
     'colorfield',  
     'ita',
+     'rest_auth',
     'drf_generators',
-     'corsheaders',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    "allauth.socialaccount",
+       'django_filters',
+ 
 ]
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,6 +70,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'upita_servers.urls'
+
+REST_FRAMEWORK = {
+
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+#    'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAdminUser'
+#    ),
+   
+}
 
 TEMPLATES = [
     {
@@ -88,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'upita',
         'USER': 'root',
-        'PASSWORD': 'P@$$w0rd1234',
+        # 'PASSWORD': 'P@$$w0rd1234',
         # 'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',

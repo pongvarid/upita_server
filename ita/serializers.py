@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile
+from django.contrib.auth.models import User
 
 
 class AgencyTypeSerializer(ModelSerializer):
@@ -8,6 +9,11 @@ class AgencyTypeSerializer(ModelSerializer):
         model = AgencyType
         fields = '__all__'
 
+class UserViewSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'
 
 class AgencySerializer(ModelSerializer):
 

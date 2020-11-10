@@ -1,6 +1,26 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer,ValidationError,CharField
 from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile
+from django.contrib.auth.models import User
 
+
+
+class UserCreateSerializer(ModelSerializer):
+    password =  CharField(style={'input_type': 'password'}, write_only=True)
+    password2 =  CharField(style={'input_type': 'password'}, write_only=True)
+    class Meta:
+        model = User
+        fields = ('id','username','first_name','last_name','email', 'password', 'password2')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        password2 = validated_data.pop('password2')
+        if password != password2:
+            raise  ValidationError({'password': 'Passwords must match.'})
+        user = User(**validated_data)
+        user.set_password(password) 
+        user.save()
+        return user
 
 class AgencyTypeSerializer(ModelSerializer):
 
