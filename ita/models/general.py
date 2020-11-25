@@ -11,7 +11,10 @@ class AgencyType(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.name 
+        return self.name
+    @property
+    def fullName(self):
+        return self.name
         
 class Agency(models.Model):
     class Meta:

@@ -6,8 +6,8 @@ from ita.models.general import *
 # Create your models here.
 class Year(models.Model):
     class Meta:
-        verbose_name = _("ปีการศึกษา")
-        verbose_name_plural = _("ปีการศึกษา") 
+        verbose_name = _("ปีงบประมาณ")
+        verbose_name_plural = _("ปีงบประมาณ")
     year = models.CharField(max_length=255)
     status = models.BooleanField(default=False,verbose_name="ปิดการใช้งาน")
     created_at = models.DateTimeField(auto_now_add=True)

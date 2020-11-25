@@ -23,5 +23,9 @@ urlpatterns = [
     path('api/ita/v1/',include("ita.api.urls")),  
     path('api/ita/v2/',include("ita.apiv2.urls")),
     path('rest-auth/', include('rest_auth.urls')),
+    path('api/iit/v1/', include('iit.api.urls')),
+    path('api/iit/v2/', include('iit.urls')),
+    path('api/eit/v1/', include('eit.api.urls')),
+    path('api/eit/v2/', include('eit.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),  
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

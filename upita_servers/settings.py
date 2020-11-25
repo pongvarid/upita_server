@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
+    'polymorphic',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -43,14 +44,17 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'colorfield',  
     'ita',
-     'rest_auth',
+    'iit',
+    'eit',
+    'rest_auth',
     'drf_generators',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
     "allauth.socialaccount",
-       'django_filters',
+    'django_filters',
+    'django_property_filter',
  
 ]
 SITE_ID = 1
