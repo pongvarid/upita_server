@@ -105,8 +105,8 @@ class IssueDetail(models.Model):
 
 class AnswerIssue(models.Model):
     class Meta:
-        verbose_name = _("การตอบแบบประเมิน")
-        verbose_name_plural = _("การตอบแบบประเมิน")
+        verbose_name = _("การตอบแบบประเมิน (ข้อมูลดิบ)")
+        verbose_name_plural = _("การตอบแบบประเมิน (ข้อมูลดิบ)")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     assessmentIssues = models.ForeignKey(AssessmentIssues, on_delete=models.CASCADE)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
@@ -142,8 +142,8 @@ class AnswerIssue(models.Model):
 
 class AnswerSuggestion(models.Model):
     class Meta:
-        verbose_name = _("การตอบข้อเสนอแนะ")
-        verbose_name_plural = _("การตอบข้อเสนอแนะ")
+        verbose_name = _("การตอบข้อเสนอแนะ ")
+        verbose_name_plural = _("การตอบข้อเสนอแนะ ")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
@@ -160,3 +160,18 @@ class AnswerSuggestion(models.Model):
         return self.user.first_name + " " + self.user.last_name
 
 
+class UserInAnswer(models.Model):
+    class Meta:
+        verbose_name = _("การตอบแบบประเมิน (รายบุคลล)")
+        verbose_name_plural = _("การตอบแบบประเมิน (รายบุคลล)")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
+    year = models.ForeignKey(Year, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    @property
+    def agency_name(self):
+        return self.agency.name
+    @property
+    def user_name(self):
+        return self.user.first_name + " " + self.user.last_name

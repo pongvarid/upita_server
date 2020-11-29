@@ -14,7 +14,7 @@ admin.site.site_header = 'ระบบ ITA'
 admin.site.register(AgencyType)
 
 class AgencyAdmin(admin.ModelAdmin): 
-    list_display = ('name','agency_type') 
+    list_display = ('name','agency_type','count','percent','eit','iit')
     list_filter = ('agency_type',)
     search_fields = ['name']
 admin.site.register(Agency,AgencyAdmin)

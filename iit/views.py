@@ -1,6 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
-from iit.serializers import AnswerIssueReportSerializer, YearSerializer, ChoiceSerializer, AscendSerializer, ExistSerializer, AnswerSerializer, AssessmentIssuesSerializer, IssueSerializer, IssueDetailSerializer, AnswerIssueSerializer, AnswerSuggestionSerializer
-from iit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssue, AnswerSuggestion
+from iit.serializers import AnswerIssueReportSerializer, YearSerializer, ChoiceSerializer, AscendSerializer, \
+    ExistSerializer, AnswerSerializer, AssessmentIssuesSerializer, IssueSerializer, IssueDetailSerializer, \
+    AnswerIssueSerializer, AnswerSuggestionSerializer, UserInAnswerSerializer
+from iit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssue, \
+    AnswerSuggestion, UserInAnswer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters
 
@@ -69,3 +72,9 @@ class AnswerSuggestionViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ['agency', 'year' ]
     # search_fields = ['username', 'first_name', 'last_name']
+
+class UserInAnswerViewSet(ModelViewSet):
+    queryset = UserInAnswer.objects.order_by('pk')
+    serializer_class = UserInAnswerSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['user', 'year']

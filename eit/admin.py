@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Register your models here.
 from eit.models import  *
-
+from ita.models import Agency
 admin.site.register(Year)
 admin.site.register(Ascend)
 admin.site.register(Exist)
@@ -61,3 +61,5 @@ class AnswerSuggestionAdmin(admin.ModelAdmin):
     list_display = ( 'agency_name' ,'user_name', 'year')
     # list_filter = ('agency','issue')
 admin.site.register(AnswerSuggestionEit,AnswerSuggestionAdmin)
+
+

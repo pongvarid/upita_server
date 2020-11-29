@@ -15,5 +15,5 @@ router.register(r'issuedetail', views.IssueDetailViewSet)
 router.register(r'answerissue', views.AnswerIssueViewSet)
 router.register(r'answerissue-report', views.AnswerIssueReportViewSet)
 router.register(r'answersuggestion', views.AnswerSuggestionViewSet)
-
+router.register(r'ansewer/user', views.UserInAnswerViewSet)
 urlpatterns = router.urls

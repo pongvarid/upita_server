@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
-from iit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssue, AnswerSuggestion
+from iit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssue, AnswerSuggestion, UserInAnswer
 
 
 class YearSerializer(ModelSerializer):
@@ -85,4 +85,11 @@ class AnswerSuggestionSerializer(ModelSerializer):
 
     class Meta:
         model = AnswerSuggestion
+        fields = '__all__'
+
+
+class UserInAnswerSerializer(ModelSerializer):
+
+    class Meta:
+        model = UserInAnswer
         fields = '__all__'
