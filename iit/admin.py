@@ -70,3 +70,9 @@ class UserInAnswerAdmin(admin.ModelAdmin):
     list_display = ( 'agency_name' ,'user_name', 'year','created_at')
     list_filter = ('agency','year')
 admin.site.register(UserInAnswer,UserInAnswerAdmin)
+
+class IssueDetailadmin(admin.ModelAdmin):
+    search_fields = [ 'sub_name',]
+    list_display = ( 'sub_name' ,'choiceType', 'choiceTypeData','created_at')
+    list_filter = ('issue',)
+admin.site.register(IssueDetail,IssueDetailadmin)

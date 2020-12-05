@@ -54,7 +54,7 @@ class IssueSerializer(ModelSerializer):
 class IssueDetailSerializer(ModelSerializer):
     class Meta:
         model = IssueDetail
-        fields = '__all__'
+        fields = ('id','issue','sub_name','choice','choiceType','choiceTypeData')
 
 
 class AnswerIssueSerializer(ModelSerializer):
@@ -65,20 +65,20 @@ class AnswerIssueSerializer(ModelSerializer):
 
 class AnswerIssueReportSerializer(ModelSerializer):
     # assessmentIssues = AssessmentIssuesSerializer()
-    issueDetail = IssueDetailSerializer()
-    issue = IssueSerializer()
-    issueDetail_pk = SerializerMethodField()
-    issue_pk   = SerializerMethodField()
-    assessment_pk = SerializerMethodField()
+    # issueDetail = IssueDetailSerializer()
+    # issue = IssueSerializer()
+    # issueDetail_pk = SerializerMethodField()
+    # issue_pk   = SerializerMethodField()
+    # assessment_pk = SerializerMethodField()
     class Meta:
         model = AnswerIssue
-        fields = '__all__'
-    def get_issueDetail_pk(self, obj):
-        return obj.issueDetail_id
-    def get_issue_pk(self, obj):
-        return obj.issue_id
-    def get_assessment_pk(self, obj):
-        return obj.assessmentIssues_id
+        fields = ('user','assessmentIssues','agency','year','issue','issueDetail','value','value_type','value_by','issueDetail_name','issue_name','issue_type','choiceTypeData' )
+    # def get_issueDetail_pk(self, obj):
+    #     return obj.issueDetail_id
+    # def get_issue_pk(self, obj):
+    #     return obj.issue_id
+    # def get_assessment_pk(self, obj):
+    #     return obj.assessmentIssues_id 
 
 
 class AnswerSuggestionSerializer(ModelSerializer):

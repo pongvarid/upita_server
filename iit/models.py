@@ -101,7 +101,19 @@ class IssueDetail(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return str(self.id) + " : "+ self.sub_name
+        return str(self.id) + " : "+ self.sub_name 
+    
+    @property
+    def choiceType(self):
+        return self.choice.name
+    @property
+    def choiceTypeData(self):
+        if(self.choice.type == 1):
+            return 'เชิงบวก'
+        elif(self.choice.type == 0):
+            return 'เชิงลบ'
+        else:
+            return 'ทั่วไป' 
 
 class AnswerIssue(models.Model):
     class Meta:
@@ -138,6 +150,18 @@ class AnswerIssue(models.Model):
     @property
     def issue_name(self):
         return "( i"+ str(self.issue.order) +") "+  self.issue.name
+    
+    @property
+    def choiceTypeData(self):
+        return self.issueDetail.choiceTypeData
+    
+    @property
+    def issue_type(self):
+        return self.issueDetail.choiceType
+    
+    @property
+    def choice_val(self):
+        return self.issueDetail.choiceType
 
 
 class AnswerSuggestion(models.Model):
