@@ -65,22 +65,23 @@ class AnswerIssueEitSerializer(ModelSerializer):
         fields = '__all__'
 
 class AnswerIssueEitReportSerializer(ModelSerializer):
-    issueDetail = IssueDetailSerializer()
-    issue = IssueSerializer()
-    issueDetail_pk = SerializerMethodField()
-    issue_pk = SerializerMethodField()
-    assessment_pk = SerializerMethodField()
+    # issueDetail = IssueDetailSerializer()
+    # issue = IssueSerializer()
+    # issueDetail_pk = SerializerMethodField()
+    # issue_pk = SerializerMethodField()
+    # assessment_pk = SerializerMethodField()
     class Meta:
         model = AnswerIssueEit
-        fields = '__all__'
-        fields = '__all__'
+        # fields = '__all__'
+        # fields = '__all__'
+        fields = ('user','assessmentIssues','agency','year','issue','issueDetail','value','value_type','value_by','issueDetail_name','issue_name','issue_type','choiceTypeData' )
 
-    def get_issueDetail_pk(self, obj):
-        return obj.issueDetail_id
-    def get_issue_pk(self, obj):
-        return obj.issue_id
-    def get_assessment_pk(self, obj):
-        return obj.assessmentIssues_id
+    # def get_issueDetail_pk(self, obj):
+    #     return obj.issueDetail_id
+    # def get_issue_pk(self, obj):
+    #     return obj.issue_id
+    # def get_assessment_pk(self, obj):
+    #     return obj.assessmentIssues_id
 
 class AnswerSuggestionEitSerializer(ModelSerializer):
 

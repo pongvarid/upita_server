@@ -50,7 +50,7 @@ class AnswerIssueAdmin(admin.ModelAdmin):
     # autocomplete_fields = ['name',]
     ordering = ('issue__order',)
     list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value_by','user_name')
-    list_filter = ('agency','assessmentIssues','issue','value_by')
+    list_filter = ('agency','assessmentIssues','user','issue','value_by')
 
 admin.site.register(AnswerIssue,AnswerIssueAdmin)
 

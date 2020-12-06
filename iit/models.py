@@ -5,6 +5,7 @@ from polymorphic.models import PolymorphicModel
 from django.utils.translation import ugettext_lazy as _
 from ita.models.general import *
 from django.contrib.auth.models import User
+from django_pandas.managers import DataFrameManager
 
 class Year(models.Model):
     class Meta:
@@ -130,6 +131,7 @@ class AnswerIssue(models.Model):
     value_by =   models.CharField(max_length=200 ,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = DataFrameManager()
 
     @property
     def agency_name(self):

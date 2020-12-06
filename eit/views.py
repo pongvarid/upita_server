@@ -53,7 +53,7 @@ class AnswerIssueReportViewSet(ModelViewSet):
     queryset = AnswerIssueEit.objects.order_by('pk')
     serializer_class = AnswerIssueEitReportSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    filterset_fields = ['agency','year','assessmentIssues' ]
+    filterset_fields = ['agency','year','assessmentIssues','user' ]
     search_fields = ['username', 'first_name', 'last_name']
 
 

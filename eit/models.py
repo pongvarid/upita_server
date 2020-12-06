@@ -103,6 +103,19 @@ class IssueDetail(models.Model):
     def __str__(self):
         return str(self.id) + " : "+ self.sub_name
 
+    @property
+    def choiceType(self):
+        return self.choice.name
+
+    @property
+    def choiceTypeData(self):
+        if (self.choice.type == 1):
+            return 'เชิงบวก'
+        elif (self.choice.type == 0):
+            return 'เชิงลบ'
+        else:
+            return 'ทั่วไป'
+
 class AnswerIssueEit(models.Model):
     class Meta:
         verbose_name = _("การตอบแบบประเมิน")
@@ -121,7 +134,7 @@ class AnswerIssueEit(models.Model):
 
     @property
     def agency_name(self):
-        return "( i"+ str(self.issue.order) +") "+ self.agency.name
+        return "( i" + str(self.issue.order) + ") " + self.agency.name
 
     @property
     def issueDetail_name(self):
@@ -137,7 +150,19 @@ class AnswerIssueEit(models.Model):
 
     @property
     def issue_name(self):
-        return "( i"+ str(self.issue.order) +") "+  self.issue.name
+        return "( i" + str(self.issue.order) + ") " + self.issue.name
+
+    @property
+    def choiceTypeData(self):
+        return self.issueDetail.choiceTypeData
+
+    @property
+    def issue_type(self):
+        return self.issueDetail.choiceType
+
+    @property
+    def choice_val(self):
+        return self.issueDetail.choiceType
 
 
 class AnswerSuggestionEit(models.Model):

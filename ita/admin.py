@@ -37,7 +37,7 @@ admin.site.register(RateResult,RateResultAdmin)
 
 class UserAdmin(admin.ModelAdmin): 
     autocomplete_fields = ['agency','user']  
-    list_display = ('full_name','agency','register_type','status','passing','in_up') 
+    list_display = ('full_name','agency','register_type','status','passing','in_up','oit')
     list_filter = ('agency','passing','status','in_up')
     search_fields = ['full_name']
 admin.site.register(Profile,UserAdmin) 
