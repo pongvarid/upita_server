@@ -4,6 +4,8 @@ from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, P
 from django.contrib.auth.models import User
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import authentication_classes, permission_classes
 
 
 class UserCreate(ModelViewSet): 
@@ -21,6 +23,7 @@ class AgencyViewSet(ModelViewSet):
     # filter_backends = (DjangoFilterBackend,filters.SearchFilter)
     # filterset_fields = ['agency_type__id',]
 
+@permission_classes((AllowAny, ))
 class AgencyList(generics.ListAPIView):
     queryset = Agency.objects.all() 
     serializer_class = AgencySerializer
