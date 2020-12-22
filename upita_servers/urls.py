@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static 
+from frontend.views import index
 
 urlpatterns = [
+    path('', index),
     path('admin/', admin.site.urls),
     path('api/ita/v1/',include("ita.api.urls")),  
     path('api/ita/v2/',include("ita.apiv2.urls")),
