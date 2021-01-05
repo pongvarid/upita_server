@@ -68,3 +68,17 @@ class RateResult(models.Model):
     @property
     def number(self):
         return self.rate.number
+
+class UrlInRate(models.Model):
+    class Meta:
+        verbose_name = _("url การตรวจสอบ")
+        verbose_name_plural = _("url การตรวจสอบ")
+    rateresult = models.ForeignKey(RateResult, on_delete=models.CASCADE,blank=True, null=True)
+    name = models.TextField(blank=True, null=True, verbose_name="หัวข้อ")
+    urls = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return  self.rate.name
+
+

@@ -10,8 +10,8 @@ router.register(r'agency', views.AgencyViewSet)
 router.register(r'year', views.YearViewSet)
 router.register(r'rate', views.RateViewSet)
 router.register(r'ratestatus', views.RateStatusViewSet)
-router.register(r'rateresult', views.RateResultViewSet)
+router.register(r'rateresultall', views.RateStatusViewSetAll)
 router.register(r'profile', views.ProfileViewSet)
-
+router.register(r'urlrate', views.UrlInRateViewSet)
 urlpatterns = router.urls 
 

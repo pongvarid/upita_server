@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,Field,SerializerMethodField
-from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile
+from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile,UrlInRate
 from django.contrib.auth import get_user_model, authenticate
 UserModel = get_user_model()
 
@@ -103,11 +103,22 @@ class RateResultSerializer(ModelSerializer):
         model = RateResult
         fields = '__all__'
 
+class UrlInRateSerializer(ModelSerializer):
+    class Meta:
+        model = UrlInRate
+        fields = '__all__'
+
 class RateResultViewSerializer(ModelSerializer):
     user = UserDetailsSerializer()
     user_passing = UserDetailsSerializer()
     rate_status = RateStatusSerializer()
+    urls = SerializerMethodField()
     class Meta:
         model = RateResult
         fields = '__all__'
+
+    def get_urls(self, obj):
+        url = UrlInRate.objects.filter(rateresult=obj.id)
+        data = UrlInRateSerializer(url,many=True)
+        return data.data
 
