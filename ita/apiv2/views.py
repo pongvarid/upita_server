@@ -301,8 +301,8 @@ class RateResultAPIListView(APIView):
     
     def put(self, request, format=None):
         try: 
-            items = RateResult.objects.get(agency=request.data['agency'],rate=request.data['rate'])
-            serializer = RateResultViewSerializer(items)
+            items = RateResult.objects.filter(agency=request.data['agency'],rate=request.data['rate'])
+            serializer = RateResultViewSerializer(items,many=True)
             return Response(serializer.data, status=201)
         except :
             return Response(None, status=201)
