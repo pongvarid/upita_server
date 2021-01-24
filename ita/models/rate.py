@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from ita.models.general import *
+from eit.models import Year as eitYear
 # Create your models here.
 class Year(models.Model):
     class Meta:
@@ -80,5 +81,19 @@ class UrlInRate(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return  self.rateresult.name
+
+
+class ReportAgencyEit(models.Model):
+    name = models.TextField( verbose_name="ชื่อองค์กร/ชื่อ - นามสกุล *(ไม่ใส่คำนำหน้า)")
+    tel = models.TextField(blank=True, null=True, verbose_name="เบอร์")
+    other = models.TextField(blank=True, null=True, verbose_name="ช่องทางการติดต่ออื่นๆ")
+    email = models.TextField(blank=True, null=True, verbose_name="อีเมล์")
+    type = models.TextField(blank=True, null=True, verbose_name="ประเภทการติดต่อ")
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE,blank=True, null=True,verbose_name="หน่วยงานที่ส่ง")
+    year = models.ForeignKey(eitYear, on_delete=models.CASCADE, verbose_name="ประจำปี")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return  self.name
 
 

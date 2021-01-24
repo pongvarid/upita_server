@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from ita.api.serializers import AgencyTypeSerializer, AgencySerializer, YearSerializer, RateSerializer, \
     RateStatusSerializer, RateResultSerializer, ProfileSerializer, UserCreateSerializer, UrlInRateSerializer, \
-    RateStatusSerializerAll
-from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate
+    RateStatusSerializerAll,ReportAgencyEitSerializerAll
+from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate,ReportAgencyEit
 from django.contrib.auth.models import User
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -67,3 +67,9 @@ class RateResultViewSet(ModelViewSet):
 class ProfileViewSet(ModelViewSet):
     queryset = Profile.objects.order_by('pk')
     serializer_class = ProfileSerializer
+
+class ReportAgencyEitViewSet(ModelViewSet):
+    queryset = ReportAgencyEit.objects.order_by('pk')
+    serializer_class = ReportAgencyEitSerializerAll
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['agency', 'year']

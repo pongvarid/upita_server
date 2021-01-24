@@ -16,5 +16,6 @@ router.register(r'result', views.RateResultViewSet)
 router.register(r'rateresult', views.RateResultViewSet)
 router.register(r'profile', views.ProfileViewSet)
 router.register(r'urlrate', views.UrlInRateViewSet)
+router.register(r'eituser', views.ReportAgencyEitViewSet)
 urlpatterns = router.urls 
 
