@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter
 
 # Register your models here.
 from iit.models import  *
@@ -38,8 +39,14 @@ class IssueAdmin(admin.ModelAdmin):
     ordering = ('order',)
     search_fields = ['name', ]
     list_display = ('fullName','assessment','type',)
-    list_filter = ('assessment__year','assessment',)
+    # list_filter = ('assessment__year','assessment',)
 
+    list_filter = (
+        # for ordinary fields
+        ('assessment__year', DropdownFilter),
+        # for choice fields
+        ('assessment', ChoiceDropdownFilter),
+    )
 admin.site.register(Issue,IssueAdmin)
 
 
@@ -50,7 +57,14 @@ class AnswerIssueAdmin(admin.ModelAdmin):
     # autocomplete_fields = ['name',]
     ordering = ('issue__order',)
     list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value_by','user_name')
-    list_filter = ('agency','assessmentIssues','user','issue','value_by')
+    # list_filter = ('agency','assessmentIssues','user','issue','value_by')
+    list_filter = (
+        ('agency', RelatedDropdownFilter),
+        ('assessmentIssues', RelatedDropdownFilter),
+        ('user', RelatedDropdownFilter),
+        ('issue', RelatedDropdownFilter),
+        ('value_by', DropdownFilter),
+    )
 
 admin.site.register(AnswerIssue,AnswerIssueAdmin)
 
@@ -68,7 +82,10 @@ admin.site.register(AnswerSuggestion,AnswerSuggestionAdmin)
 class UserInAnswerAdmin(admin.ModelAdmin):
     search_fields = [ 'agency__name','user__first_name','user__last_name']
     list_display = ( 'agency_name' ,'user_name', 'year','created_at')
-    list_filter = ('agency','year')
+    # list_filter = ('agency','year')
+    list_filter = (
+        ('agency', RelatedDropdownFilter),
+        ('year', RelatedDropdownFilter),)
 admin.site.register(UserInAnswer,UserInAnswerAdmin)
 
 class IssueDetailadmin(admin.ModelAdmin):

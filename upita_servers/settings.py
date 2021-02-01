@@ -48,9 +48,13 @@ INSTALLED_APPS = [
     'ita',
     'iit',
     'eit',
+    'report',
     'frontend',
     'rest_auth',
     'drf_generators',
+    'import_export',
+    'reversion',
+    'jsoneditor',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -58,6 +62,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     'django_filters',
     'django_property_filter',
+    'django_admin_listfilter_dropdown',
  
 ]
 SITE_ID = 1
@@ -88,7 +93,8 @@ REST_FRAMEWORK = {
 #    ),
    
 }
-
+JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.js'
+JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.css'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

@@ -201,3 +201,4 @@ class UserInAnswer(models.Model):
     @property
     def user_name(self):
         return self.user.first_name + " " + self.user.last_name
+
