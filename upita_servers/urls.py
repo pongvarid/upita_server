@@ -18,7 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static 
 from frontend.views import index
-
+from django.urls import re_path
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
@@ -32,3 +32,7 @@ urlpatterns = [
     path('api/report/v1/', include('report.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),  
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+
+urlpatterns += [
+    re_path('^.*$',index),
+]
