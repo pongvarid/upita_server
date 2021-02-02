@@ -27,7 +27,7 @@ class ReportDetail(models.Model):
         verbose_name_plural = _("รายงานคะแนนภาพรวม")
     year = models.CharField(max_length=255, verbose_name="ปีงบประมาณ")
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="หน่วยงาน/คณะ")
-    name = models.CharField(max_length=255, verbose_name="ปีงบประมาณ")
+    name = models.CharField(max_length=255, verbose_name="ชื่อ")
     score = models.FloatField(default=0.00)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

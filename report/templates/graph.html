@@ -38,9 +38,10 @@
 <div id="app" style="width: 100%;">
 
 
-      <apexchart width="100%" height="300" type="bar" :options="options" :series="series"></apexchart>
+      <apexchart width="100%" height="300" type="polarArea" :options="options" :series="series"></apexchart>
 
 </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -54,17 +55,24 @@ Vue.component('apexchart', VueApexCharts)
       vuetify: new Vuetify(),
       data:()=>{
           return ({
+           series: [{% for name in cl.queryset  %} Number({{ name.score}}).toFixed(2),{% endfor %}],
+
               options:{ xaxis: {
-              categories: [{% for data in cl.queryset  %} '{{ data.agency }}',{% endfor %} ],
-              position: 'top',
-            },},
-               series: [{
-            name: 'คะแนน',
-            data: [{% for gender in cl.queryset  %}{{ gender.iit }},{% endfor %}]
-          }],
+               position: 'top',
+            },
+                     labels: [ {% for data in cl.queryset  %} '{{ data.name }}',{% endfor %} ],
+              },
 
           });
-      }
+      },
+    async created(){
+          for (let i=0; i < this.rawA.length; i++){
+              this.rawC.push({
+                  "name":this.rawA[i],
+                  "value":this.rawB[i]
+              })
+          }
+    }
     })
   </script>
 

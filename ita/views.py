@@ -1,7 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from ita.serializers import AgencyTypeSerializer, AgencySerializer, YearSerializer, RateSerializer, RateStatusSerializer, RateResultSerializer, ProfileSerializer
 from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile
-
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 class AgencyTypeViewSet(ModelViewSet):
     queryset = AgencyType.objects.order_by('pk')
@@ -16,6 +17,9 @@ class AgencyViewSet(ModelViewSet):
 class YearViewSet(ModelViewSet):
     queryset = Year.objects.order_by('pk')
     serializer_class = YearSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['status', 'year']
+    search_fields = ['year']
 
 
 class RateViewSet(ModelViewSet):

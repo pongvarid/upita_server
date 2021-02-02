@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'reversion',
     'jsoneditor',
     'django.contrib.sites',
+'django_admin_multiple_choice_list_filter',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
@@ -124,7 +125,7 @@ DATABASES = {
         'NAME': 'upita',
         'USER': 'root',
         # 'PASSWORD': 'P@$$w0rd1234',
-        'PASSWORD': '1234',
+        #'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

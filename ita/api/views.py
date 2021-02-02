@@ -42,6 +42,9 @@ class AgencyList(generics.ListAPIView):
 class YearViewSet(ModelViewSet):
     queryset = Year.objects.order_by('pk')
     serializer_class = YearSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['status', 'year']
+    search_fields = ['year']
 
 
 class RateViewSet(ModelViewSet):
