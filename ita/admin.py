@@ -1,7 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib import admin 
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from rest_framework.exceptions import ValidationError
+
 from .models import *
 from django.contrib.auth.models import User
 
@@ -35,9 +39,37 @@ class RateResultAdmin(admin.ModelAdmin):
     search_fields = ['rate__number','rate__name']
 admin.site.register(RateResult,RateResultAdmin)
 
-class UserAdmin(admin.ModelAdmin): 
-    autocomplete_fields = ['agency','user']  
-    list_display = ('full_name','agency','register_type','status','passing','in_up','oit')
-    list_filter = ('agency','passing','status','in_up')
-    search_fields = ['full_name']
-admin.site.register(Profile,UserAdmin) 
+class UserProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = True
+    verbose_name_plural = 'รายระเอียดผู้ใช้'
+    autocomplete_fields = ['agency',]
+
+class CustomUserCreationForm(UserCreationForm):
+    # make fields required if desired
+    # first_name = forms.CharField(required=True)
+
+    class Meta(UserCreationForm.Meta):
+        fields = ("username", "first_name", "last_name")
+
+
+# Define a new User admin
+class MyUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2','email',
+                       'first_name', 'last_name'),
+        }),
+    )
+
+    inlines = UserProfileInline,
+admin.site.unregister(User)
+admin.site.register(User,MyUserAdmin)
+# class UserAdmin(admin.ModelAdmin):
+#     autocomplete_fields = ['agency','user']
+#     list_display = ('full_name','agency','register_type','status','passing','in_up','oit')
+#     list_filter = ('agency','passing','status','in_up')
+#     search_fields = ['full_name']
+# admin.site.register(Profile,UserAdmin)
