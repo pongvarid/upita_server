@@ -26,9 +26,9 @@ admin.site.register(Agency,AgencyAdmin)
 admin.site.register(Year)
 
 class RateAdmin(admin.ModelAdmin): 
-    list_display = ('number','name','detail','year','created_at') 
-    list_filter = ('year','number')
-    search_fields = ['name','number']
+    list_display = ('number','type','name','detail','year','created_at')
+    list_filter = ('year','number','type')
+    search_fields = ['name','number','type']
 admin.site.register(Rate,RateAdmin)
 
 admin.site.register(RateStatus)
