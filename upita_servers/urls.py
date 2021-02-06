@@ -30,8 +30,10 @@ urlpatterns = [
     path('api/eit/v1/', include('eit.api.urls')),
     path('api/eit/v2/', include('eit.urls')),
     path('api/report/v1/', include('report.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),  
-] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('accounts/', include('rest_registration.api.urls')),
+
+    ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 urlpatterns += [
     re_path('^.*$',index),

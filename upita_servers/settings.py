@@ -27,7 +27,7 @@ SECRET_KEY = 'byjn@0y2kq_8ia3-q@%+e3ytkpqu12=n=zm^tocmwd8umin=(2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1","171.5.50.132"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_registration',
     'colorfield',  
     'ita',
     'iit',
@@ -152,7 +153,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': False,
+    'RESET_PASSWORD_VERIFICATION_ENABLED': False,
+    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
