@@ -60,7 +60,7 @@ Vue.component('apexchart', VueApexCharts)
             },},
                series: [{
             name: 'คะแนน',
-            data: [{% for gender in cl.queryset  %}{{ gender.iit }},{% endfor %}]
+            data: [{% for gender in cl.queryset  %}{{ gender.all }},{% endfor %}]
           }],
 
           });
