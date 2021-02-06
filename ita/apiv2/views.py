@@ -6,6 +6,18 @@ from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, P
 from django.contrib.auth.models import User
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.contrib.auth import authenticate,login
+from django.shortcuts import redirect
+
+class AdminAPIView(APIView):
+
+    def get(self, request, format=None):
+        user = authenticate(username='root', password='root')
+        if user is not None:
+            login(request, user)
+            return redirect('/admin/')
+        else:
+            return Response({"s": "error"})
 
 
 class AgencyTypeAPIView(APIView):

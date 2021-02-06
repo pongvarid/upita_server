@@ -16,6 +16,7 @@ class ReportAll(models.Model):
     eit = models.FloatField(default=0.00)
     oit = models.FloatField(default=0.00)
     all = models.FloatField(default=0.00)
+    rate = models.CharField(max_length=255,null=True,blank=True,verbose_name="ระดับ")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):

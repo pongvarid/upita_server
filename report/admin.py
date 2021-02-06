@@ -27,9 +27,10 @@ class ReportAllResource(resources.ModelResource):
 class ReportAllAdmin(ImportExportModelAdmin):
     ordering = ('all',)
     search_fields = ['agency', ]
-    list_display = ('agency','year','iit','eit','oit','all')
+    list_display = ('agency','year','rate','iit','eit','oit','all')
     # list_filter = (StatusListFilter,)
     list_filter = (
+        ('rate', DropdownFilter),
         ('year', DropdownFilter),
         StatusListFilter
     )
