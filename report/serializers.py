@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
+
+from ita.api.serializers import AgencySerializer
 from report.models import ReportAll, ReportDetail, ReportRawIIT, ReportRawEIT
 
 
@@ -8,13 +10,23 @@ class ReportAllSerializer(ModelSerializer):
         model = ReportAll
         fields = '__all__'
 
+class ReportAllSerializerAll(ModelSerializer):
+    agency = AgencySerializer()
+    class Meta:
+        model = ReportAll
+        fields = '__all__'
 
 class ReportDetailSerializer(ModelSerializer):
-
+    agency = AgencySerializer()
     class Meta:
         model = ReportDetail
         fields = '__all__'
 
+class ReportDetailSerializerAll(ModelSerializer):
+    agency = AgencySerializer()
+    class Meta:
+        model = ReportDetail
+        fields = '__all__'
 
 class ReportRawIITSerializer(ModelSerializer):
 
