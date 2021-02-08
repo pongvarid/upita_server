@@ -26,14 +26,14 @@ class AgencyTypeViewSet(ModelViewSet):
 
 
 class AgencyViewSet(ModelViewSet):
-    queryset = Agency.objects.order_by('pk')
+    queryset = Agency.objects.filter(disabled=False).order_by('pk')
     serializer_class = AgencySerializer
     # filter_backends = (DjangoFilterBackend,filters.SearchFilter)
     # filterset_fields = ['agency_type__id',]
 
 @permission_classes((AllowAny, ))
 class AgencyList(generics.ListAPIView):
-    queryset = Agency.objects.all() 
+    queryset = Agency.objects .filter(disabled=False).all()
     serializer_class = AgencySerializer
     filter_backends = (DjangoFilterBackend,filters.SearchFilter)
     filterset_fields = ['agency_type',]

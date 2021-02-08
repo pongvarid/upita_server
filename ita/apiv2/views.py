@@ -71,7 +71,7 @@ class AgencyAPIView(APIView):
 
     def get(self, request, id, format=None):
         try:
-            item = Agency.objects.get(pk=id)
+            item = Agency.objects.filter(disabled=False).get(pk=id)
             serializer = AgencySerializer(item)
             return Response(serializer.data)
         except Agency.DoesNotExist:
