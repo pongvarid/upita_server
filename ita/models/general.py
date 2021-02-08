@@ -26,6 +26,7 @@ class Agency(models.Model):
     percent = models.IntegerField(default=0,verbose_name="เกณฑ์กลุ่มตัวอย่าง(ร้อยละ)")
     eit = models.IntegerField(default=0, verbose_name="ค่าเป้าหมายกลุ่มตัวอย่างภายใน (EIT)")
     iit = models.IntegerField(default=0, verbose_name="ค่าเป้าหมายกลุ่มตัวอย่างภายนอก (IIT)")
+    disabled = models.BooleanField(default=False,verbose_name="ปิดการมองเห็น")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
