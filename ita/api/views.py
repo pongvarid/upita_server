@@ -28,6 +28,9 @@ class AgencyTypeViewSet(ModelViewSet):
 class AgencyViewSet(ModelViewSet):
     queryset = Agency.objects.filter(disabled=False).order_by('pk')
     serializer_class = AgencySerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['agency_type', "name", ]
+    search_fields = ['name', ]
     # filter_backends = (DjangoFilterBackend,filters.SearchFilter)
     # filterset_fields = ['agency_type__id',]
 
