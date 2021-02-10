@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from rest_framework.exceptions import ValidationError
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter
 
 from .models import *
 from django.contrib.auth.models import User
@@ -21,9 +22,21 @@ class AgencyAdmin(admin.ModelAdmin):
     list_display = ('name','agency_type','count','percent','eit','iit')
     list_filter = ('agency_type',)
     search_fields = ['name']
+
 admin.site.register(Agency,AgencyAdmin)
 
 admin.site.register(Year)
+
+class AgencyChangeAdmin(admin.ModelAdmin):
+    list_display = ('user','fullname','agency','agency_change','created_at')
+    list_filter = ('agency','agency_change')
+    search_fields = ['user__first_name','user__last_name','user__username','agency__name']
+    list_filter = (
+        ('user', RelatedDropdownFilter),
+        ('agency', RelatedDropdownFilter),
+        ('agency_change', RelatedDropdownFilter),
+    )
+admin.site.register(AgencyChange,AgencyChangeAdmin)
 
 class RateAdmin(admin.ModelAdmin): 
     list_display = ('number','type','name','detail','year','created_at')

@@ -31,4 +31,18 @@ class Agency(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return "("+self.agency_type.name+") "+self.name  
-    
+
+class AgencyChange(models.Model):
+    class Meta:
+        verbose_name = _("การเปลี่ยนแปลงหน่วยงาน")
+        verbose_name_plural = _("การเปลี่ยนแปลงหน่วยงาน")
+    user = models.ForeignKey(User, verbose_name="ผู้ใช้", on_delete=models.CASCADE)
+    agency = models.ForeignKey(Agency, verbose_name="หน่วยงานเดิม",related_name="old", on_delete=models.CASCADE)
+    agency_change = models.ForeignKey(Agency,verbose_name="หน่วยงานที่เปลี่ยนแปลง",related_name="new",  on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return "("+self.agency.name+") "
+    def fullname(self):
+        return self.user.first_name + " " + self.user.last_name
+

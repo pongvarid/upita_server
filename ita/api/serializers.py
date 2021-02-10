@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer,ValidationError,CharField,SerializerMethodField
-from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate, ReportAgencyEit
+from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate, ReportAgencyEit, \
+    AgencyChange
 from django.contrib.auth.models import User
 
 
@@ -87,4 +88,9 @@ class RateStatusSerializerAll(ModelSerializer):
 class ReportAgencyEitSerializerAll(ModelSerializer):
     class Meta:
         model = ReportAgencyEit
+        fields = '__all__'
+
+class AgencyChangeSerializerAll(ModelSerializer):
+    class Meta:
+        model = AgencyChange
         fields = '__all__'

@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 from ita.api.serializers import AgencyTypeSerializer, AgencySerializer, YearSerializer, RateSerializer, \
     RateStatusSerializer, RateResultSerializer, ProfileSerializer, UserCreateSerializer, UrlInRateSerializer, \
-    RateStatusSerializerAll,ReportAgencyEitSerializerAll
-from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate,ReportAgencyEit
+    RateStatusSerializerAll, ReportAgencyEitSerializerAll, AgencyChangeSerializerAll
+from ita.models import AgencyType, Agency, Year, Rate, RateStatus, RateResult, Profile, UrlInRate, ReportAgencyEit, \
+    AgencyChange
 from django.contrib.auth.models import User
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -42,6 +43,13 @@ class AgencyList(generics.ListAPIView):
     filterset_fields = ['agency_type',]
     search_fields = ['name',]
 
+class AgencyListLog(ModelViewSet):
+    queryset = AgencyChange.objects.order_by('pk')
+    serializer_class = AgencyChangeSerializerAll
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['agency','agency_change', 'user']
+
+
 class YearViewSet(ModelViewSet):
     queryset = Year.objects.order_by('pk')
     serializer_class = YearSerializer
@@ -73,9 +81,12 @@ class RateResultViewSet(ModelViewSet):
 class ProfileViewSet(ModelViewSet):
     queryset = Profile.objects.order_by('pk')
     serializer_class = ProfileSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['user',]
 
 class ReportAgencyEitViewSet(ModelViewSet):
     queryset = ReportAgencyEit.objects.order_by('pk')
     serializer_class = ReportAgencyEitSerializerAll
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ['agency', 'year']
+

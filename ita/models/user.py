@@ -19,7 +19,7 @@ class Profile(models.Model):
     passing = models.BooleanField(default=False,verbose_name="หัวหน้าหน่วยงาน")
     status = models.BooleanField(default=True,verbose_name="เปิดการใช้งาน")
     in_up = models.BooleanField(default=False,verbose_name="บุลคากรภายใน")
-    oit = models.BooleanField(default=False, verbose_name="สามารถประเมิน OIT ได้")
+    oit = models.BooleanField(default=False, verbose_name="แอดมินหน่วยงาน")
     oit_up = models.BooleanField(default=False, verbose_name="สามารถประเมิน OIT มหาวิทยาลัยพะเยา ได้")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
