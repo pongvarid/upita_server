@@ -80,4 +80,4 @@ class UserInAnswerViewSet(ModelViewSet):
     queryset = UserInAnswer.objects.order_by('pk')
     serializer_class = UserInAnswerSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    filterset_fields = ['user', 'year']
+    filterset_fields = ['user', 'year','agency',]

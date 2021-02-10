@@ -64,3 +64,6 @@ class AnswerIssueReportViewSet(ModelViewSet):
 class AnswerSuggestionEitViewSet(ModelViewSet):
     queryset = AnswerSuggestionEit.objects.order_by('pk')
     serializer_class = AnswerSuggestionEitSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['agency', 'year', ]
+    search_fields = ['agency', 'year',]
