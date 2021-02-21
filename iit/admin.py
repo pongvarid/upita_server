@@ -53,7 +53,7 @@ admin.site.register(Issue,IssueAdmin)
 class AnswerIssueAdmin(admin.ModelAdmin):
     # inlines = [IssueInline, ]
     # autocomplete_fields = ['farm','gender','color','status','status_breed']
-    search_fields = ['assessmentIssues__name','agency__name','issue__name']
+    search_fields = ['assessmentIssues__name','agency__name','issue__name','user__first_name','user__last_name']
     # autocomplete_fields = ['name',]
     ordering = ('issue__order',)
     list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value_by','user_name')
@@ -64,6 +64,7 @@ class AnswerIssueAdmin(admin.ModelAdmin):
         ('user', RelatedDropdownFilter),
         ('issue', RelatedDropdownFilter),
         ('value_by', DropdownFilter),
+        ('year', DropdownFilter),
     )
 
 admin.site.register(AnswerIssue,AnswerIssueAdmin)
@@ -82,10 +83,10 @@ admin.site.register(AnswerSuggestion,AnswerSuggestionAdmin)
 class UserInAnswerAdmin(admin.ModelAdmin):
     search_fields = [ 'agency__name','user__first_name','user__last_name']
     list_display = ( 'agency_name' ,'user_name', 'year','created_at')
-    # list_filter = ('agency','year')
+    list_filter = ('agency',)
     list_filter = (
         ('agency', RelatedDropdownFilter),
-        ('year', RelatedDropdownFilter),)
+        ('year',DropdownFilter),)
 admin.site.register(UserInAnswer,UserInAnswerAdmin)
 
 class IssueDetailadmin(admin.ModelAdmin):

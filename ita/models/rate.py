@@ -85,6 +85,9 @@ class UrlInRate(models.Model):
 
 
 class ReportAgencyEit(models.Model):
+    class Meta:
+        verbose_name = _("ข้อมูลผู้มีส่วนได้ส่วนเสียภายนอก")
+        verbose_name_plural = _("ข้อมูลผู้มีส่วนได้ส่วนเสียภายนอก")
     name = models.TextField( verbose_name="ชื่อองค์กร/ชื่อ - นามสกุล *(ไม่ใส่คำนำหน้า)")
     tel = models.TextField(blank=True, null=True, verbose_name="เบอร์")
     other = models.TextField(blank=True, null=True, verbose_name="ช่องทางการติดต่ออื่นๆ")

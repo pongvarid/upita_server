@@ -80,6 +80,12 @@ class MyUserAdmin(UserAdmin):
     inlines = UserProfileInline,
 admin.site.unregister(User)
 admin.site.register(User,MyUserAdmin)
+
+
+
+
+
+
 # class UserAdmin(admin.ModelAdmin):
 #     autocomplete_fields = ['agency','user']
 #     list_display = ('full_name','agency','register_type','status','passing','in_up','oit')
