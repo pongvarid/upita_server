@@ -43,7 +43,7 @@ class YearAPIView(APIView):
 class TestStudentAPIView(APIView):
     def get(self, request, format=None):
         try:
-            profile = Profile.objects.filter(agency=41).values_list('id', flat=True)
+            profile = Profile.objects.filter(agency=41).values_list('user_id', flat=True)
             item = AnswerIssue.objects.filter(user__in=profile)
             serializer = AnswerIssueSerializerX(item,many=True)
             return Response(serializer.data)
