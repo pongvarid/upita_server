@@ -93,3 +93,8 @@ class UserInAnswerSerializer(ModelSerializer):
     class Meta:
         model = UserInAnswer
         fields = '__all__'
+
+class AnswerIssueSerializerX(ModelSerializer):
+    class Meta:
+        model = AnswerIssue
+        fields = ['agency','user_student']

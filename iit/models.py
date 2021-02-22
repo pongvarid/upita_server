@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 from polymorphic.models import PolymorphicModel
 from django.utils.translation import ugettext_lazy as _
+
+from ita.models import Profile
 from ita.models.general import *
 from django.contrib.auth.models import User
 from django_pandas.managers import DataFrameManager
@@ -168,6 +170,11 @@ class AnswerIssue(models.Model):
     @property
     def user_email(self):
         return self.user.email
+
+    @property
+    def user_student(self):
+        profile = Profile.objects.get(user=self.user.id)
+        return profile.agency.name
 
 
 class AnswerSuggestion(models.Model):
