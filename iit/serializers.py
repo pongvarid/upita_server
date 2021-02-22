@@ -97,4 +97,4 @@ class UserInAnswerSerializer(ModelSerializer):
 class AnswerIssueSerializerX(ModelSerializer):
     class Meta:
         model = AnswerIssue
-        fields = ['agency','user_student']
+        fields = ['id','agency_name','user_student']
