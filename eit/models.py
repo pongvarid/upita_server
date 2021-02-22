@@ -149,6 +149,10 @@ class AnswerIssueEit(models.Model):
         return self.assessmentIssues.name
 
     @property
+    def user_email(self):
+        return self.user.email
+
+    @property
     def issue_name(self):
         return "( i" + str(self.issue.order) + ") " + self.issue.name
 

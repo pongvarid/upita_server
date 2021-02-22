@@ -185,6 +185,10 @@ class AnswerSuggestion(models.Model):
     def user_name(self):
         return self.user.first_name + " " + self.user.last_name
 
+    @property
+    def user_email(self):
+        return self.user.email
+
 
 class UserInAnswer(models.Model):
     class Meta:

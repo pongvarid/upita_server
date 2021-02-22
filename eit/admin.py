@@ -52,7 +52,7 @@ class AnswerIssueAdmin(admin.ModelAdmin):
     search_fields = ['assessmentIssues__name','agency__name','issue__name','user__email','user__username','user__first_name','user__last_name']
     # autocomplete_fields = ['name',]
     ordering = ('issue__order',)
-    list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value','user_name')
+    list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value','user_name','user_email')
     # list_filter = ('agency','assessmentIssues','issue')
     list_filter = (
         ('agency', RelatedOnlyDropdownFilter),
