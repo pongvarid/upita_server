@@ -188,3 +188,7 @@ class AnswerSuggestionEit(models.Model):
     def user_name(self):
         return self.user.first_name + " " + self.user.last_name
 
+    @property
+    def user_email(self):
+        return self.user.email
+

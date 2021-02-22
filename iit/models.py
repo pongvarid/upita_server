@@ -165,6 +165,10 @@ class AnswerIssue(models.Model):
     def choice_val(self):
         return self.issueDetail.choiceType
 
+    @property
+    def user_email(self):
+        return self.user.email
+
 
 class AnswerSuggestion(models.Model):
     class Meta:
@@ -205,4 +209,8 @@ class UserInAnswer(models.Model):
     @property
     def user_name(self):
         return self.user.first_name + " " + self.user.last_name
+
+    @property
+    def user_email(self):
+        return self.user.email
 

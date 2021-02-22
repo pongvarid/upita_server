@@ -72,17 +72,17 @@ admin.site.register(AnswerIssue,AnswerIssueAdmin)
 class AnswerSuggestionAdmin(admin.ModelAdmin):
     # inlines = [IssueInline, ]
     # # autocomplete_fields = ['farm','gender','color','status','status_breed']
-    # search_fields = [ 'agency__name','issue__name','user__first_name','user__last_name']
+    search_fields = [ 'agency__name','user__first_name','user__last_name','user__email']
     # autocomplete_fields = ['name',]
     # ordering = ('issue__order',)
-    list_display = ( 'agency_name' ,'user_name', 'year')
+    list_display = ( 'agency_name' ,'user_name', 'year','user_email')
     # list_filter = ('agency','issue')
 admin.site.register(AnswerSuggestion,AnswerSuggestionAdmin)
 # admin.site.register(IssueDetail)
 
 class UserInAnswerAdmin(admin.ModelAdmin):
-    search_fields = [ 'agency__name','user__first_name','user__last_name']
-    list_display = ( 'agency_name' ,'user_name', 'year','created_at')
+    search_fields = [ 'agency__name','user__first_name','user__last_name','user__email']
+    list_display = ( 'agency_name' ,'user_name','user_email', 'year','created_at')
     list_filter = ('agency',)
     list_filter = (
         ('agency', RelatedDropdownFilter),
