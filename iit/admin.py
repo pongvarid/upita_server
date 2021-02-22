@@ -49,6 +49,25 @@ class IssueAdmin(admin.ModelAdmin):
     )
 admin.site.register(Issue,IssueAdmin)
 
+class IsVeryBenevolentFilter(admin.SimpleListFilter):
+    title = 'ใครเป็นนิสิต'
+    parameter_name = 'is_very_benevolent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        profile = Profile.objects.filter(agency=41).values_list('user_id', flat=True)
+        if value == 'Yes':
+
+            return queryset.filter(user__in=profile)
+        elif value == 'No':
+            return queryset.exclude(user__in=profile)
+        return queryset
 
 class AnswerIssueAdmin(admin.ModelAdmin):
     # inlines = [IssueInline, ]
@@ -59,6 +78,7 @@ class AnswerIssueAdmin(admin.ModelAdmin):
     list_display = ( 'agency_name','user_student','assessmentIssues_name','issue_name','issueDetail_name','value_by','user_name','user_email')
     # list_filter = ('agency','assessmentIssues','user','issue','value_by')
     list_filter = (
+        IsVeryBenevolentFilter,
         ('agency', RelatedDropdownFilter),
         # 'user_student',
         ('assessmentIssues', RelatedDropdownFilter),
@@ -83,25 +103,6 @@ class AnswerSuggestionAdmin(admin.ModelAdmin):
 admin.site.register(AnswerSuggestion,AnswerSuggestionAdmin)
 # admin.site.register(IssueDetail)
 
-class IsVeryBenevolentFilter(admin.SimpleListFilter):
-    title = 'ใครเป็นนิสิต'
-    parameter_name = 'is_very_benevolent'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('Yes', 'Yes'),
-            ('No', 'No'),
-        )
-
-    def queryset(self, request, queryset):
-        value = self.value()
-        profile = Profile.objects.filter(agency=41).values_list('user_id', flat=True)
-        if value == 'Yes':
-
-            return queryset.filter(user__in=profile)
-        elif value == 'No':
-            return queryset.exclude(user__in=profile)
-        return queryset
 
 class UserInAnswerAdmin(admin.ModelAdmin):
     search_fields = [ 'agency__name','user__first_name','user__last_name','user__email']
