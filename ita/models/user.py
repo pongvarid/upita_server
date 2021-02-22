@@ -5,8 +5,8 @@ from ita.models.general import *
 # Create your models here.
 class Profile(models.Model):
     class Meta:
-        verbose_name = _("ผู้ใช้")
-        verbose_name_plural = _("ผู้ใช้") 
+        verbose_name = _("ผู้ใช้ (รายระเอียดเชิงลึก)")
+        verbose_name_plural = _("ผู้ใช้ (รายระเอียดเชิงลึก)")
     ANSWERS = (
         ('microsoft.com','microsoft.com'),
         ('google.com','google.com'),
@@ -30,3 +30,7 @@ class Profile(models.Model):
     @property
     def full_name(self):
         return "%s %s %s"%(self.user.id, self.user.first_name, self.user.last_name)
+
+    @property
+    def user_email(self):
+        return self.user.email

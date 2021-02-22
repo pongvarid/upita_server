@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from rest_framework.exceptions import ValidationError
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter,RelatedOnlyDropdownFilter
 
 from .models import *
 from django.contrib.auth.models import User
@@ -86,9 +86,17 @@ admin.site.register(User,MyUserAdmin)
 
 
 
-# class UserAdmin(admin.ModelAdmin):
-#     autocomplete_fields = ['agency','user']
-#     list_display = ('full_name','agency','register_type','status','passing','in_up','oit')
-#     list_filter = ('agency','passing','status','in_up')
-#     search_fields = ['full_name']
-# admin.site.register(Profile,UserAdmin)
+class UserAdmin(admin.ModelAdmin):
+    # autocomplete_fields = ['agency','user']
+    search_fields = ['agency__name','user__email','agency__id','user__username','user__first_name','user__last_name']
+    list_display = ('full_name','user_email','agency','register_type','status','passing','in_up','oit')
+    # list_filter = ('agency','passing','status','in_up')
+    list_filter = (
+        ('agency', RelatedOnlyDropdownFilter),
+        'in_up',
+        'register_type'
+    )
+    list_editable = ('agency',)
+    class Media:
+        js = ('multi_line_list_edit.js',)
+admin.site.register(Profile,UserAdmin)
