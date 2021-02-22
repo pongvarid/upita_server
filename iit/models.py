@@ -221,3 +221,16 @@ class UserInAnswer(models.Model):
     def user_email(self):
         return self.user.email
 
+    @property
+    def user_student(self):
+        profile = Profile.objects.get(user=self.user.id)
+        return profile.agency.name
+
+    @property
+    def user_agency_id(self):
+        profile = Profile.objects.get(user=self.user.id)
+        if (profile.agency.id == 41):
+            return True
+        else:
+            return False
+
