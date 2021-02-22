@@ -49,7 +49,7 @@ admin.site.register(Issue,IssueAdmin)
 class AnswerIssueAdmin(admin.ModelAdmin):
     # inlines = [IssueInline, ]
     # autocomplete_fields = ['farm','gender','color','status','status_breed']
-    search_fields = ['assessmentIssues__name','agency__name','issue__name','user__first_name','user__last_name']
+    search_fields = ['assessmentIssues__name','agency__name','issue__name','user__email','user__username','user__first_name','user__last_name']
     # autocomplete_fields = ['name',]
     ordering = ('issue__order',)
     list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value','user_name')
