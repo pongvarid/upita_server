@@ -98,8 +98,11 @@ class AnswerSuggestionAdmin(admin.ModelAdmin):
     search_fields = [ 'agency__name','user__first_name','user__last_name','user__email']
     # autocomplete_fields = ['name',]
     # ordering = ('issue__order',)
-    list_display = ( 'agency_name' ,'user_name', 'year','user_email')
-    # list_filter = ('agency','issue')
+    list_display = ( 'agency_name' ,'user_name','suggestion', 'year','user_email')
+    list_filter = (
+        ('agency', RelatedDropdownFilter),
+        ('year', DropdownFilter)
+    )
 admin.site.register(AnswerSuggestion,AnswerSuggestionAdmin)
 # admin.site.register(IssueDetail)
 
