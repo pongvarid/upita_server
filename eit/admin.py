@@ -1,3 +1,6 @@
+
+from import_export import resources
+
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -5,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from eit.models import  *
 from ita.models import Agency, ReportAgencyEit
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, RelatedOnlyDropdownFilter,RelatedOnlyFieldListFilter
+from import_export.admin import ImportExportModelAdmin
 
 admin.site.register(Year)
 
@@ -74,7 +78,16 @@ class AnswerSuggestionAdmin(admin.ModelAdmin):
         ('year',DropdownFilter),)
 admin.site.register(AnswerSuggestionEit,AnswerSuggestionAdmin)
 
-class ReportAgencyEitAdmin(admin.ModelAdmin):
+
+class ReportAgencyEitResource(resources.ModelResource):
+
+    class Meta:
+        model = ReportAgencyEit
+        fields = ('name','tel','email','other', 'type' ,'agency__name', 'year__year','created_at',)
+
+
+class ReportAgencyEitAdmin(ImportExportModelAdmin):
+    resource_class = ReportAgencyEitResource
     # inlines = [IssueInline, ]
     # autocomplete_fields = ['farm','gender','color','status','status_breed']
     # search_fields = [ 'agency__name','issue__name']
