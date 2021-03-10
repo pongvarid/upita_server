@@ -17,7 +17,7 @@ class ReportAllSerializerAll(ModelSerializer):
         fields = '__all__'
 
 class ReportDetailSerializer(ModelSerializer):
-    agency = AgencySerializer()
+     
     class Meta:
         model = ReportDetail
         fields = '__all__'
