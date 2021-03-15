@@ -51,6 +51,8 @@ class IssueDetailViewSet(ModelViewSet):
 class AnswerIssueEitViewSet(ModelViewSet):
     queryset = AnswerIssueEit.objects.order_by('pk')
     serializer_class = AnswerIssueEitSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['agency', 'year', 'assessmentIssues', 'user']
 
 class AnswerIssueReportViewSet(ModelViewSet):
     queryset = AnswerIssueEit.objects.order_by('pk')
