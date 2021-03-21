@@ -100,7 +100,7 @@ class AgencyAPIView(APIView):
 class AgencyAPIListView(APIView):
 
     def get(self, request, format=None):
-        items = Agency.objects.order_by('pk')
+        items = Agency.objects.order_by('name')
         paginator = PageNumberPagination()
         # result_page = paginator.paginate_queryset(items, request)
         serializer = AgencySerializer(items, many=True)
