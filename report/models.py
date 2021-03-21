@@ -4,7 +4,7 @@ from django.db import models
 from ita.models.general import *
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from jsonfield import JSONField
+from django.db import models
 
 class ReportAll(models.Model):
     class Meta:
@@ -42,7 +42,7 @@ class ReportRawIIT(models.Model):
         verbose_name_plural = _("รายงานรายระเอียด IIT")
     year = models.CharField(max_length=255, verbose_name="ปีงบประมาณ")
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="หน่วยงาน/คณะ")
-    raw = JSONField()
+    raw = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -54,8 +54,11 @@ class ReportRawEIT(models.Model):
         verbose_name_plural = _("รายงานรายระเอียด EIT")
     year = models.CharField(max_length=255, verbose_name="ปีงบประมาณ")
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="หน่วยงาน/คณะ")
-    raw = JSONField()
+    raw = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return str(self.agency.name)
+
+
+

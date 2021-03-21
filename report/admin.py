@@ -58,3 +58,6 @@ class ReportDetailAdmin(ImportExportModelAdmin):
     resource_class = Q9Resource
     change_list_template = 'graph.html'
 admin.site.register(ReportDetail,ReportDetailAdmin)
+
+
+
