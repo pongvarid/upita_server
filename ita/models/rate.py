@@ -71,6 +71,10 @@ class RateResult(models.Model):
     def number(self):
         return self.rate.number
 
+
+
+
+
 class UrlInRate(models.Model):
     class Meta:
         verbose_name = _("url การตรวจสอบ")
