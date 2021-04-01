@@ -43,18 +43,28 @@ class AssessmentIssuesSerializer(ModelSerializer):
         model = AssessmentIssues
         fields = '__all__'
 
-
-class IssueSerializer(ModelSerializer):
-
-    class Meta:
-        model = Issue
-        fields = '__all__'
-
-
 class IssueDetailSerializer(ModelSerializer):
     class Meta:
         model = IssueDetail
         fields = ('id','issue','sub_name','choice','choiceType','choiceTypeData')
+
+class IssueSerializer(ModelSerializer):
+    # choice_type = SerializerMethodField()
+    class Meta:
+        model = Issue
+        fields = '__all__'
+    # def get_choice_type(self,obj):
+    #     try:
+    #         choice = IssueDetail.objects.filter(issue=obj.id)
+    #         choice = IssueDetailSerializer(choice,many=True)
+    #         return choice.data
+    #     except:
+    #         return None
+
+
+
+
+
 
 
 class AnswerIssueSerializer(ModelSerializer):
@@ -97,4 +107,30 @@ class UserInAnswerSerializer(ModelSerializer):
 class AnswerIssueSerializerX(ModelSerializer):
     class Meta:
         model = AnswerIssue
-        fields = ['id','agency_name','user_student']
+        fields = ['id','agency_name','IssueSerializer']
+
+class UserInAnswerAdminSerializerX(ModelSerializer):
+    class Meta:
+        model = UserInAnswer
+        fields = ['id', 'agency_name', 'user_student']
+
+
+class IssueDetailAllSerializer(ModelSerializer):
+    choice = ChoiceSerializer(read_only=True)
+    class Meta:
+        model = IssueDetail
+        fields = '__all__'
+
+
+class IssueAllSerialillzer(ModelSerializer):
+    choice_type = SerializerMethodField()
+    class Meta:
+        model = Issue
+        fields = '__all__'
+    def get_choice_type(self,obj):
+        try:
+            choice = IssueDetail.objects.filter(issue=obj.id)
+            choice = IssueDetailAllSerializer(choice,many=True)
+            return choice.data
+        except:
+            return None

@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from iit.serializers import AnswerIssueReportSerializer, YearSerializer, ChoiceSerializer, AscendSerializer, \
     ExistSerializer, AnswerSerializer, AssessmentIssuesSerializer, IssueSerializer, IssueDetailSerializer, \
-    AnswerIssueSerializer, AnswerSuggestionSerializer, UserInAnswerSerializer
+    AnswerIssueSerializer, AnswerSuggestionSerializer, UserInAnswerSerializer, IssueAllSerialillzer
 from iit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssue, \
     AnswerSuggestion, UserInAnswer
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,6 +48,11 @@ class IssueViewSet(ModelViewSet):
     queryset = Issue.objects.order_by('pk')
     serializer_class = IssueSerializer
 
+class IssueAllViewSet(ModelViewSet):
+    queryset = Issue.objects.order_by('pk')
+    serializer_class = IssueAllSerialillzer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['assessment__year']
 
 class IssueDetailViewSet(ModelViewSet):
     queryset = IssueDetail.objects.order_by('pk')
@@ -58,7 +63,7 @@ class AnswerIssueViewSet(ModelViewSet):
     queryset = AnswerIssue.objects.order_by('pk')
     serializer_class = AnswerIssueSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    filterset_fields = ['agency','year','assessmentIssues' ]
+    filterset_fields = ['agency','year','issue','issueDetail','assessmentIssues' ]
     search_fields = ['username', 'first_name', 'last_name']
 
 class AnswerIssueReportViewSet(ModelViewSet):

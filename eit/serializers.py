@@ -88,3 +88,24 @@ class AnswerSuggestionEitSerializer(ModelSerializer):
     class Meta:
         model = AnswerSuggestionEit
         fields = '__all__'
+
+
+class IssueDetailAllSerializer(ModelSerializer):
+    choice = ChoiceSerializer(read_only=True)
+    class Meta:
+        model = IssueDetail
+        fields = '__all__'
+
+
+class IssueAllSerialillzer(ModelSerializer):
+    choice_type = SerializerMethodField()
+    class Meta:
+        model = Issue
+        fields = '__all__'
+    def get_choice_type(self,obj):
+        try:
+            choice = IssueDetail.objects.filter(issue=obj.id)
+            choice = IssueDetailAllSerializer(choice,many=True)
+            return choice.data
+        except:
+            return None

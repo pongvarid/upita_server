@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
-from eit.serializers import YearSerializer, ChoiceSerializer, AscendSerializer, ExistSerializer,AnswerIssueEitReportSerializer,  AnswerSerializer, AssessmentIssuesSerializer, IssueSerializer, IssueDetailSerializer, AnswerIssueEitSerializer, AnswerSuggestionEitSerializer
+from eit.serializers import YearSerializer, ChoiceSerializer, AscendSerializer, ExistSerializer,AnswerIssueEitReportSerializer,  AnswerSerializer, \
+    AssessmentIssuesSerializer, IssueSerializer, IssueDetailSerializer, AnswerIssueEitSerializer, AnswerSuggestionEitSerializer, IssueAllSerialillzer
 from eit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssueEit, AnswerSuggestionEit
 from rest_framework import generics, filters
 
@@ -37,10 +38,17 @@ class AssessmentIssuesViewSet(ModelViewSet):
     queryset = AssessmentIssues.objects.order_by('pk')
     serializer_class = AssessmentIssuesSerializer
 
-
 class IssueViewSet(ModelViewSet):
     queryset = Issue.objects.order_by('pk')
     serializer_class = IssueSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['assessment__year']
+
+class IssueAllViewSet(ModelViewSet):
+    queryset = Issue.objects.order_by('pk')
+    serializer_class = IssueAllSerialillzer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ['assessment__year']
 
 
 class IssueDetailViewSet(ModelViewSet):
@@ -52,7 +60,7 @@ class AnswerIssueEitViewSet(ModelViewSet):
     queryset = AnswerIssueEit.objects.order_by('pk')
     serializer_class = AnswerIssueEitSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    filterset_fields = ['agency', 'year', 'assessmentIssues', 'user']
+    filterset_fields = ['agency', 'year', 'issue', 'issueDetail', 'assessmentIssues','user']
 
 class AnswerIssueReportViewSet(ModelViewSet):
     queryset = AnswerIssueEit.objects.order_by('pk')
