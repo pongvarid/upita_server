@@ -21,7 +21,7 @@ from frontend.views import index
 from django.urls import re_path
 urlpatterns = [
     path('', index),
-    path('admin/', admin.site.urls),
+    path('super-up-plan-admin/', admin.site.urls),
     path('setting/',include("web.urls")),
     path('api/ita/v1/',include("ita.api.urls")),  
     path('api/ita/v2/',include("ita.apiv2.urls")),
