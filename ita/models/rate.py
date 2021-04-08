@@ -17,12 +17,17 @@ class Year(models.Model):
         return self.year 
         
 class Rate(models.Model):
+
     class Meta:
         verbose_name = _("ประเด็นการตรวจสอบ")
-        verbose_name_plural = _("ประเด็นการตรวจสอบ") 
+        verbose_name_plural = _("ประเด็นการตรวจสอบ")
+    ANSWERS = (
+        ('การเปิดเผยข้อมูล', 'การเปิดเผยข้อมูล'),
+        ('การป้องกันการทุจริต', 'การป้องกันการทุจริต')
+    )
     number = models.IntegerField(default=0,verbose_name="ข้อ")
     year = models.ForeignKey(Year, on_delete=models.CASCADE,verbose_name="ประจำปี")
-    type_base = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภทตัวชี้วัด")
+    type_base = models.CharField(max_length=255,choices=ANSWERS, blank=True, null=True, verbose_name="ประเภทตัวชี้วัด")
     type = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภท")
     name = models.CharField(max_length=255,verbose_name="หัวข้อ")
     detail = models.TextField(verbose_name="รายระเอียด")
