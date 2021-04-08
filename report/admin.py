@@ -51,7 +51,7 @@ class Q9Resource(resources.ModelResource):
 class ReportDetailAdmin(ImportExportModelAdmin):
 
     search_fields = ['agency', ]
-    list_display = ('name','score','agency','year')
+    list_display = ('order','name','number','agency','year')
     # list_filter = (StatusListFilter,)
     list_filter = (
         ('year', DropdownFilter),
