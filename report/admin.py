@@ -46,8 +46,12 @@ class Q9Resource(resources.ModelResource):
     agency = Field()
     class Meta:
         model = ReportDetail
-        fields = ('name','score','agency__name','year','created_at')
-        export_order = ('name','score','agency__name','year','created_at')
+        fields = ('order','name','score','agency__name','year','created_at')
+        export_order = ('order','name','score','agency__name','year','created_at')
+
+    def get_queryset(self):
+        return self._meta.model.objects.order_by('order').order_by('agency__name')
+
 class ReportDetailAdmin(ImportExportModelAdmin):
 
     search_fields = ['agency', ]
