@@ -22,9 +22,11 @@ class Rate(models.Model):
         verbose_name_plural = _("ประเด็นการตรวจสอบ") 
     number = models.IntegerField(default=0,verbose_name="ข้อ")
     year = models.ForeignKey(Year, on_delete=models.CASCADE,verbose_name="ประจำปี")
+    type_base = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภทตัวชี้วัด")
+    type = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภท")
     name = models.CharField(max_length=255,verbose_name="หัวข้อ")
     detail = models.TextField(verbose_name="รายระเอียด")
-    type = models.CharField(max_length=255,blank=True,null=True,verbose_name="ประเภท")
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
