@@ -20,8 +20,8 @@ class ReportAllResource(resources.ModelResource):
     agency = Field()
     class Meta:
         model = ReportAll
-        fields = ('agency__name','year','iit','eit','oit','all','created_at')
-        export_order = ('agency__name','year','iit','eit','oit','all','created_at')
+        fields = ('agency__name','year','iit','eit','oit','all','rate','created_at')
+        export_order = ('agency__name','year','iit','eit','oit','all','rate','created_at')
 
 
 class ReportAllAdmin(ImportExportModelAdmin):
