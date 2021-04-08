@@ -50,7 +50,7 @@ class Q9Resource(resources.ModelResource):
         export_order = ('order','name','score','agency__name','year','created_at')
 
     def get_queryset(self):
-        return self._meta.model.objects.order_by('order').order_by('agency__name')
+        return self._meta.model.objects.order_by('-order').order_by('agency__name')
 
 class ReportDetailAdmin(ImportExportModelAdmin):
 
