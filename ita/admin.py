@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from rest_framework.exceptions import ValidationError
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter,RelatedOnlyDropdownFilter
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter,RelatedOnlyDropdownFilter,SimpleDropdownFilter
 
 from .models import *
 from django.contrib.auth.models import User
@@ -39,8 +39,15 @@ class AgencyChangeAdmin(admin.ModelAdmin):
 admin.site.register(AgencyChange,AgencyChangeAdmin)
 
 class RateAdmin(admin.ModelAdmin): 
-    list_display = ('number','type','name','detail','year','created_at')
-    list_filter = ('year','number','type')
+    list_display = ('number','type_base','type','name','detail','year','created_at')
+
+    list_filter = (
+        ('year', RelatedDropdownFilter),
+        ('type_base', DropdownFilter),
+        ('type', DropdownFilter),
+        ('number', DropdownFilter),
+    )
+
     search_fields = ['name','number','type']
 admin.site.register(Rate,RateAdmin)
 
