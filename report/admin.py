@@ -22,6 +22,9 @@ class ReportAllResource(resources.ModelResource):
         model = ReportAll
         fields = ('agency__name','year','iit','eit','oit','all','rate','created_at')
         export_order = ('agency__name','year','iit','eit','oit','all','rate','created_at')
+        
+        def get_queryset(self):
+            return self._meta.model.objects.order_by('rate')
 
 
 class ReportAllAdmin(ImportExportModelAdmin):
