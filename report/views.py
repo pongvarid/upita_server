@@ -36,8 +36,12 @@ class ReportDetailViewSetAll(ModelViewSet):
 class ReportRawIITViewSet(ModelViewSet):
     queryset = ReportRawIIT.objects.order_by('pk')
     serializer_class = ReportRawIITSerializer
+    filterset_fields = ['agency', 'year']
+    search_fields = ['agency', 'year']
 
 
 class ReportRawEITViewSet(ModelViewSet):
     queryset = ReportRawEIT.objects.order_by('pk')
     serializer_class = ReportRawEITSerializer
+    filterset_fields = ['agency', 'year']
+    search_fields = ['agency', 'year']
