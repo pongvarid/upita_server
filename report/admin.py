@@ -8,6 +8,7 @@ from report.models import  *
 from django_admin_multiple_choice_list_filter.list_filters import MultipleChoiceListFilter
 from import_export import resources
 from import_export.fields import Field
+from django_json_widget.widgets import JSONEditorWidget
 
 class StatusListFilter(MultipleChoiceListFilter):
     title = 'Agency'
@@ -75,6 +76,10 @@ class ReportIITEIT(ImportExportModelAdmin):
         ('result', DropdownFilter),
         ('agency', RelatedOnlyDropdownFilter),
     )
+    formfield_overrides = {
+        # fields.JSONField: {'widget': JSONEditorWidget}, # if django < 3.1
+        models.TextField: {'widget': JSONEditorWidget},
+    }
 
 admin.site.register(ReportRawIIT,ReportIITEIT)
 admin.site.register(ReportRawEIT,ReportIITEIT)
