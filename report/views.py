@@ -36,6 +36,7 @@ class ReportDetailViewSetAll(ModelViewSet):
 class ReportRawIITViewSet(ModelViewSet):
     queryset = ReportRawIIT.objects.order_by('pk')
     serializer_class = ReportRawIITSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ['agency', 'year']
     search_fields = ['agency', 'year']
 
@@ -43,5 +44,6 @@ class ReportRawIITViewSet(ModelViewSet):
 class ReportRawEITViewSet(ModelViewSet):
     queryset = ReportRawEIT.objects.order_by('pk')
     serializer_class = ReportRawEITSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ['agency', 'year']
     search_fields = ['agency', 'year']
