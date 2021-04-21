@@ -72,7 +72,6 @@ class ReportIITEIT(ImportExportModelAdmin):
     list_display = ('year','agency','score','score30','result','user_set','user_do')
     list_filter = (
         ('year', DropdownFilter),
-        ('name', DropdownFilter),
         ('result', DropdownFilter),
         ('agency', RelatedOnlyDropdownFilter),
     )
