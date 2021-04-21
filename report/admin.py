@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter,RelatedOnlyDropdownFilter
 from import_export.admin import ImportExportModelAdmin,ImportMixin, ExportMixin
 # Register your models here.
 from reversion.admin import VersionAdmin
@@ -66,5 +66,17 @@ class ReportDetailAdmin(ImportExportModelAdmin):
     change_list_template = 'graph.html'
 admin.site.register(ReportDetail,ReportDetailAdmin)
 
+class ReportIITEIT(ImportExportModelAdmin):
 
+    search_fields = ['agency','year' ]
+    list_display = ('year','agency','score','score30','result','user_set','user_do')
+    list_filter = (
+        ('year', DropdownFilter),
+        ('name', DropdownFilter),
+        ('result', DropdownFilter),
+        ('agency', RelatedOnlyDropdownFilter),
+    )
+
+admin.site.register(ReportRawIIT,ReportIITEIT)
+admin.site.register(ReportRawEIT,ReportIITEIT)
 
