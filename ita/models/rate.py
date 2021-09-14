@@ -10,6 +10,8 @@ class Year(models.Model):
         verbose_name = _("ปีงบประมาณ")
         verbose_name_plural = _("ปีงบประมาณ")
     year = models.CharField(max_length=255)
+    result_ppch = models.TextField(null=True,blank=True,verbose_name="ผลประเมินรายปี ปปช.")
+    status_ppch = models.BooleanField(default=False,verbose_name="แสดงผลประเมินรายปี ปปช.")
     status = models.BooleanField(default=False,verbose_name="ปิดการใช้งาน")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
