@@ -22,6 +22,7 @@ class Agency(models.Model):
         verbose_name_plural = _("หน่วยงาน") 
     agency_type = models.ForeignKey(AgencyType, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    number = models.IntegerField(null=True,blank=True,verbose_name="ลำดับ")
     count = models.IntegerField(default=0,verbose_name="จำนวนบุคลากร")
     percent = models.IntegerField(default=0,verbose_name="เกณฑ์กลุ่มตัวอย่าง(ร้อยละ)")
     eit = models.IntegerField(default=0, verbose_name="ค่าเป้าหมายกลุ่มตัวอย่างภายนอก (EIT)")
