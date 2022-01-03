@@ -45,8 +45,13 @@ class IssueAdmin(admin.ModelAdmin):
     search_fields = ['name',]
     # autocomplete_fields = ['name',]
     ordering = ('order',)
-    list_display = ('fullName','assessment','type',)
-    list_filter = ('assessment__year','assessment',)
+    list_display = ('fullName','assessment','type',) 
+    list_filter = (
+        # for ordinary fields
+        ('assessment__year', RelatedDropdownFilter),
+        # for choice fields
+        ('assessment', RelatedDropdownFilter),
+    )
 
 admin.site.register(Issue,IssueAdmin)
 

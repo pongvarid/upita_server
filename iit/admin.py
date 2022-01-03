@@ -43,9 +43,9 @@ class IssueAdmin(admin.ModelAdmin):
 
     list_filter = (
         # for ordinary fields
-        ('assessment__year', DropdownFilter),
+        ('assessment__year', RelatedDropdownFilter),
         # for choice fields
-        ('assessment', ChoiceDropdownFilter),
+        ('assessment', RelatedDropdownFilter),
     )
 admin.site.register(Issue,IssueAdmin)
 
