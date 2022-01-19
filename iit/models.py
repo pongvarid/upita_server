@@ -19,6 +19,7 @@ class Year(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.year
+
 class Choice(PolymorphicModel):
     typeList = [
         (1,'เชิงบวก'),
@@ -83,7 +84,7 @@ class Issue(models.Model):
     ]
     assessment = models.ForeignKey(AssessmentIssues, on_delete=models.CASCADE)
     order = models.IntegerField(null=True,blank=True )
-    name = models.CharField(max_length=200)
+    name = models.TextField()
     type = models.BooleanField(default=True,choices=typeList)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
