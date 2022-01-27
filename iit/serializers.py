@@ -99,10 +99,12 @@ class AnswerSuggestionSerializer(ModelSerializer):
 
 
 class UserInAnswerSerializer(ModelSerializer):
-
+    fullname = SerializerMethodField(read_only=True)
     class Meta:
         model = UserInAnswer
         fields = '__all__'
+    def get_fullname(self,obj):
+        return str(obj.user.first_name) + " "+ str(obj.user.last_name)
 
 class AnswerIssueSerializerX(ModelSerializer):
     class Meta:
@@ -110,6 +112,7 @@ class AnswerIssueSerializerX(ModelSerializer):
         fields = ['id','agency_name','IssueSerializer']
 
 class UserInAnswerAdminSerializerX(ModelSerializer):
+    
     class Meta:
         model = UserInAnswer
         fields = ['id', 'agency_name', 'user_student']

@@ -9,6 +9,7 @@ from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDrop
 
 from .models import *
 from django.contrib.auth.models import User
+from adminsortable2.admin import SortableAdminMixin
 
 admin.site.site_header = 'ระบบ ITA'
 
@@ -19,7 +20,7 @@ admin.site.site_header = 'ระบบ ITA'
 admin.site.register(AgencyType)
 
 class AgencyAdmin(admin.ModelAdmin): 
-    list_display = ('name','agency_type','count','percent','eit','iit','number')
+    list_display = ('number','name','agency_type','count','percent','eit','iit')
     list_filter = ('agency_type',)
     search_fields = ['name']
 

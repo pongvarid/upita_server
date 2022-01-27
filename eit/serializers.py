@@ -1,6 +1,11 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
 from eit.models import Year, Choice, Ascend, Exist, Answer, AssessmentIssues, Issue, IssueDetail, AnswerIssueEit, AnswerSuggestionEit
+from django.contrib.auth.models import User
 
+class CurrentUserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name')
 
 class YearSerializer(ModelSerializer):
 
@@ -84,11 +89,13 @@ class AnswerIssueEitReportSerializer(ModelSerializer):
     #     return obj.assessmentIssues_id
 
 class AnswerSuggestionEitSerializer(ModelSerializer):
-
+ 
+    fullname = SerializerMethodField(read_only=True)
     class Meta:
         model = AnswerSuggestionEit
         fields = '__all__'
-
+    def get_fullname(self,obj):
+        return str(obj.user.first_name) + " "+ str(obj.user.last_name)
 
 class IssueDetailAllSerializer(ModelSerializer):
     choice = ChoiceSerializer(read_only=True)

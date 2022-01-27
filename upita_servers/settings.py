@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     "allauth.socialaccount",
+     'adminsortable2',
     'django_filters',
     'django_property_filter',
     'django_admin_listfilter_dropdown',
