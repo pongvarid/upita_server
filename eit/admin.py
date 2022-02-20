@@ -9,6 +9,7 @@ from eit.models import  *
 from ita.models import Agency, ReportAgencyEit
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, RelatedOnlyDropdownFilter,RelatedOnlyFieldListFilter
 from import_export.admin import ImportExportModelAdmin
+from admin_auto_filters.filters import AutocompleteFilter
 
 admin.site.register(Year)
 
@@ -91,6 +92,13 @@ class ReportAgencyEitResource(resources.ModelResource):
         fields = ('name','tel','email','other', 'type' ,'agency__name', 'year__year','created_at',)
 
 
+
+class AgencyFilter(AutocompleteFilter):
+    title = 'Agency' # display title
+    field_name = 'agency' # name of the foreign key field
+
+
+
 class ReportAgencyEitAdmin(ImportExportModelAdmin):
     resource_class = ReportAgencyEitResource
     # inlines = [IssueInline, ]
@@ -98,11 +106,11 @@ class ReportAgencyEitAdmin(ImportExportModelAdmin):
     # search_fields = [ 'agency__name','issue__name']
     autocomplete_fields = ['agency',]
     # ordering = ('issue__order',)
-    list_display = ('name','tel','email', 'type' ,'agency', 'year')
+    list_display = ('name','tel','email','agency', 'year', 'type' )
     # list_filter = ('year', 'type', 'agency')
     list_filter = (
-        ('agency', RelatedOnlyDropdownFilter),
-        ('year', DropdownFilter),
+        AgencyFilter,
+        ('year', RelatedDropdownFilter),
         ('type', DropdownFilter),
     )
 admin.site.register(ReportAgencyEit,ReportAgencyEitAdmin)
