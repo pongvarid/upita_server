@@ -90,13 +90,11 @@ class AnswerIssueEitReportSerializer(ModelSerializer):
 
 class AnswerSuggestionEitSerializer(ModelSerializer):
  
-    fullname = SerializerMethodField(read_only=True)
+ 
     class Meta:
         model = AnswerSuggestionEit
         fields = '__all__'
-    def get_fullname(self,obj):
-        return str(obj.user.first_name) + " "+ str(obj.user.last_name)
-
+ 
 class IssueDetailAllSerializer(ModelSerializer):
     choice = ChoiceSerializer(read_only=True)
     class Meta:
