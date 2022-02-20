@@ -5,6 +5,7 @@ from ita.api import views as views1
 
 urlpatterns = [
 
+  url(r'^accounts/$', views.UserAccount.as_view()),
   url(r'^useradmin/$', views.AdminAPIView.as_view()),
   url(r'^agencytype/(?P<id>[0-9]+)/$', views.AgencyTypeAPIView.as_view()),
   url(r'^agencytype/$', views.AgencyTypeAPIListView.as_view()),
