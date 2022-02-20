@@ -106,10 +106,11 @@ class ReportAgencyEitAdmin(ImportExportModelAdmin):
     # search_fields = [ 'agency__name','issue__name']
     autocomplete_fields = ['agency',]
     # ordering = ('issue__order',)
-    list_display = ('name','tel','email','agency', 'year', 'type' )
+    search_fields = ['name','tel','email','type']
+    list_display = ('name','tel','email','type','agency', 'year'  )
     # list_filter = ('year', 'type', 'agency')
     list_filter = (
-        AgencyFilter,
+        ('agency', RelatedDropdownFilter),
         ('year', RelatedDropdownFilter),
         ('type', DropdownFilter),
     )
