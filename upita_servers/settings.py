@@ -53,12 +53,13 @@ INSTALLED_APPS = [
     'frontend',
     'web',
     'oit',
-    'django_json_widget',
+    'moral_organization',
+  
     'rest_auth',
     'drf_generators',
     'import_export',
     'reversion',
-    'jsoneditor',
+  
     'django.contrib.sites',
     'django_admin_multiple_choice_list_filter',
     'allauth',
@@ -133,7 +134,7 @@ DATABASES = {
         #'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
-        'PASSWORD': 'Up2021',
+        'PASSWORD': 'Root@1234',
         'OPTIONS': {
             "init_command": "SET foreign_key_checks = 0;",
         },

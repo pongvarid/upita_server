@@ -9,7 +9,7 @@ from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDrop
 
 from .models import *
 from django.contrib.auth.models import User
-from adminsortable2.admin import SortableAdminMixin
+# from adminsortable2.admin import SortableAdminMixin
 
 admin.site.site_header = 'ระบบ ITA'
 

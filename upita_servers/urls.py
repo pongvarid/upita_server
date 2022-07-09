@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/report/v1/', include('report.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('rest_registration.api.urls')),
+    path('api/moral_organization/', include('moral_organization.api_urls'))
 
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
