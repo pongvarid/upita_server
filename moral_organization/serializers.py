@@ -1,11 +1,43 @@
 from dataclasses import field
-from rest_framework.serializers import ModelSerializer
-from moral_organization.models import Category, Assessment, Choice, Main_exercise, Do_exercise
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from moral_organization.models import Year, Category, Assessment, Choice, Main_exercise, Do_exercise
 
+
+class YearSerializers(ModelSerializer):
+    class Meta:
+        model = Year
+        fields = "__all__"
+class ChoiceInitSerializers(ModelSerializer):
+    class Meta:
+        model = Choice
+        fields = "__all__"
+
+class AssessmentInitSerializers(ModelSerializer):
+    choices = SerializerMethodField(read_only=True)
+    class Meta:
+        model = Assessment
+        fields = "__all__"
+    def get_choices(self,obj):
+        try:
+            data = Choice.objects.filter(assessment__id=obj.id)
+            data =  ChoiceInitSerializers(data,many=True).data
+            return data
+        except:
+            return None
+        
 class CategorySerializers(ModelSerializer):
+    assessment = SerializerMethodField(read_only=True)
     class Meta:
         model = Category
         fields = "__all__"
+    def get_assessment(self,obj):
+        try:
+            data = Assessment.objects.filter(category__id=obj.id)
+            data =  AssessmentInitSerializers(data,many=True).data
+            return data
+        except:
+            return None
+        
 
 class AssessmentSerializers(ModelSerializer):
     class Meta:

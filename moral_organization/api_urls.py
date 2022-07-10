@@ -3,7 +3,7 @@ from moral_organization import views
 
 
 router = SimpleRouter()
-
+router.register(r'year', views.YearViewset)
 router.register(r'category', views.CategoryViewset)
 router.register(r'assessment', views.AssessmentViewset)
 router.register(r'choice', views.ChoiceViewset)
