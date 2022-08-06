@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from frontend.views import index
 from django.urls import re_path
 urlpatterns = [
-    path('', index),
+    # path('', index),
     path('super-up-plan-admin/', admin.site.urls),
     path('setting/',include("web.urls")),
     path('api/ita/v1/',include("ita.api.urls")),  
@@ -38,6 +38,6 @@ urlpatterns = [
 
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
-urlpatterns += [
-     re_path('^.*$',index),
- ]
+# urlpatterns += [
+#      re_path('^.*$',index),
+#  ]

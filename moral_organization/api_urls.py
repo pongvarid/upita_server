@@ -10,5 +10,10 @@ router.register(r'choice', views.ChoiceViewset)
 router.register(r'main_exercise', views.Main_exerciseViewset)
 router.register(r'do_exercise', views.Do_exerciseViewset)
 
+router.register(r'baseplan', views.BasePlanViewset)
+router.register(r'finishplan', views.FinishPlanViewset)
+router.register(r'do_exercise', views.Do_exerciseViewset)
+
+
 
 urlpatterns = router.urls

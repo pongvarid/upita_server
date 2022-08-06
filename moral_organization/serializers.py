@@ -1,6 +1,7 @@
 from dataclasses import field
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from moral_organization.models import Year, Category, Assessment, Choice, Main_exercise, Do_exercise
+from moral_organization.models import Year, Category, Assessment, Choice, Main_exercise, Do_exercise, BasePlan, \
+    PlanFile, FinishPlan
 
 
 class YearSerializers(ModelSerializer):
@@ -57,4 +58,18 @@ class Main_exerciseSerializers(ModelSerializer):
 class Do_exerciseSerializers(ModelSerializer):
     class Meta:
         model = Do_exercise
+        fields = "__all__"
+
+class BasePlanSerializers(ModelSerializer):
+    class Meta:
+        model = BasePlan
+        fields = "__all__"
+class PlanFileSerializers(ModelSerializer):
+    class Meta:
+        model = PlanFile
+        fields = "__all__"
+class FinishPlanSerializers(ModelSerializer):
+    class Meta:
+        depth =2
+        model = FinishPlan
         fields = "__all__"

@@ -10,6 +10,7 @@ cryptography==3.2.1
 defusedxml==0.6.0
 diff-match-patch==20200713
 Django==3.1.1
+django-admin-autocomplete-filter==0.7.1
 django-admin-interface==0.14.0
 django-admin-list-filter-dropdown==1.0.3
 django-admin-multiple-choice-list-filter==0.1.1
@@ -21,7 +22,7 @@ django-filter==2.4.0
 django-flat-responsive==2.0
 django-flat-theme==1.1.4
 django-import-export==2.5.0
-django-jsoneditor @ git+git://github.com/nnseva/django-jsoneditor.git@0f2893dadf75ee438301867995be08694ff33a39
+django-jazzmin==2.5.0
 django-pandas==0.6.2
 django-polymorphic==3.0.0
 django-property-filter==0.8.0

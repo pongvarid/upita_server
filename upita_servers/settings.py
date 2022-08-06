@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from theme import JAZZMIN_SETTINGS
 from pathlib import Path
 import os
 
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1","171.5.50.132"]
 # Application definition
 
 INSTALLED_APPS = [
- 
+    'jazzmin',
     'django.contrib.admin',
     #  'admin_interface', 
     'django.contrib.auth',
@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     "allauth.socialaccount",
-     'adminsortable2',
     'django_filters',
     'django_property_filter',
     'django_admin_listfilter_dropdown',
@@ -74,7 +73,7 @@ INSTALLED_APPS = [
 ]
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

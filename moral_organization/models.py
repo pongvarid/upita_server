@@ -67,3 +67,42 @@ class Do_exercise(models.Model):
 
     def __str__(self):
         return str(self.assessment)+" - "+str(self.main_exercise)+" - "+str(self.choice)
+
+class BasePlan(models.Model):
+    year = models.ForeignKey(Year,on_delete=models.CASCADE,null=True,blank=True)
+    agency = models.ForeignKey(Agency,on_delete=models.CASCADE,verbose_name="หน่วงาน")
+    name = models.CharField(max_length=250,null=True,blank=True,verbose_name="คุณธรรมเป้าหมาย")
+    problem = models.CharField(max_length=250,null=True,blank=True,verbose_name="ปัญหาที่อยากแก้")
+    good_fix = models.CharField(max_length=250,null=True,blank=True,verbose_name="กิจกรรม")
+    doing = models.CharField(max_length=250,null=True,blank=True,verbose_name="หน่วงาน")
+    kpi = models.CharField(max_length=250,null=True,blank=True,verbose_name="ตัวชี้วัด")
+    doing_date = models.DateField(null=True,blank=True,verbose_name="วัน/เดือน/ปี ที่ดำเนินงาน")
+    money = models.FloatField(default=0,null=True,blank=True,verbose_name="งบประมาณในการดำเนินงาน")
+    responsible_user = models.CharField(max_length=250,null=True,blank=True,verbose_name="ผู้รับผิดชอบ")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.name)
+
+class PlanFile(models.Model):
+    file = models.FileField(upload_to='files/plan')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.created_at)
+
+class FinishPlan(models.Model):
+    baseplan = models.ForeignKey(BasePlan,on_delete=models.CASCADE)
+    name = models.CharField(max_length=250, null=True, blank=True,verbose_name="กิจกรรม/โครงการ")
+    doing_date = models.DateTimeField(null=True, blank=True,verbose_name="วัน เวลา ที่ดำเนินการ")
+    place = models.CharField(max_length=250, null=True, blank=True, verbose_name="สถานที่ ที่ดำเนินการ")
+    count_person = models.IntegerField(default=0, null=True, blank=True,verbose_name="จำนวนผู้เช้าร่วมกิจกรรม/โครงการ")
+    money = models.FloatField(default=0, null=True, blank=True,verbose_name="งบประมาณที่ใช้ในการดำเนินงาน")
+    detail = models.TextField( null=True, blank=True,verbose_name="รายละเอียดกิจกรรม/โครงการ")
+    file = models.ManyToManyField(PlanFile,verbose_name="ไฟล์")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.name)
+
