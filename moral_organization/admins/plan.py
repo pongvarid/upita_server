@@ -27,3 +27,27 @@ class BasePlanAdmin(admin.ModelAdmin):
     inlines = [FinishPlanInlines ,]
     search_fields = ['name']
     list_display = ('name','created_at')
+    change_form_template = 'baseplan.html'
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(BasePlanAdmin, self).get_form(request, obj, **kwargs)
+        agency = request.GET.get('agency')
+        form.base_fields['agency'].initial = agency
+        if agency:
+            form.base_fields['agency'].disabled = True
+            field = form.base_fields["agency"]
+            field.widget.can_add_related = False
+            field.widget.can_change_related = False
+            field.widget.can_delete_related = False
+
+        year = request.GET.get('year')
+        form.base_fields['year'].initial = year
+        if year:
+            form.base_fields['year'].disabled = True
+            field = form.base_fields["year"]
+            field.widget.can_add_related = False
+            field.widget.can_change_related = False
+            field.widget.can_delete_related = False
+
+        return form
+

@@ -74,7 +74,9 @@ INSTALLED_APPS = [
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
-
+JSIGNATURE_WIDTH = 500
+JSIGNATURE_HEIGHT = 200
+JSIGNATURE_JQUERY = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

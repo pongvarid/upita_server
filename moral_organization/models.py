@@ -52,11 +52,31 @@ class Main_exercise(models.Model):
     address = models.CharField(max_length=250,null=True,blank=True)
     tel = models.CharField(max_length=250,null=True,blank=True)
     level = models.CharField(max_length=250,null=True,blank=True)
+
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.agency)+" - "+str(self.user)+" - "+str(self.year)
+
+class SignAdminExercise(models.Model):
+    main_exercise = models.ForeignKey(Main_exercise, on_delete=models.CASCADE)
+    signature = models.BooleanField(default=False)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    work = models.CharField(max_length=250, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.name)
+class SignPassingExercise(models.Model):
+    main_exercise = models.ForeignKey(Main_exercise,on_delete=models.CASCADE)
+    signature = models.BooleanField(default=False)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.name)
 
 class Do_exercise(models.Model):
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, null=True, blank=True)

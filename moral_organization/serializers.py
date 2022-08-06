@@ -61,15 +61,29 @@ class Do_exerciseSerializers(ModelSerializer):
         fields = "__all__"
 
 class BasePlanSerializers(ModelSerializer):
+    lists = SerializerMethodField(read_only=True)
     class Meta:
         model = BasePlan
         fields = "__all__"
+
+    def get_lists(self,obj):
+        try:
+            finish = FinishPlan.objects.filter(baseplan__id=obj.id)
+            finish = FinishPlanSerializers(finish,many=True).data
+            return finish
+        except:
+            return None
+
+class FinishPlanSerializers(ModelSerializer):
+    class Meta:
+        depth = 2
+        model = FinishPlan
+        fields = "__all__"
+
 class PlanFileSerializers(ModelSerializer):
     class Meta:
         model = PlanFile
         fields = "__all__"
-class FinishPlanSerializers(ModelSerializer):
-    class Meta:
-        depth =2
-        model = FinishPlan
-        fields = "__all__"
+
+
+

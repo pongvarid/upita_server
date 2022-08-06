@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static 
-from frontend.views import index
+from frontend.views import index, authenticatePlan, editPlan, passingSignExercise, adminSignExercise
 from django.urls import re_path
 urlpatterns = [
     # path('', index),
+    path('baseplan/',authenticatePlan),
+    path('editplan/',editPlan),
+    path('passingmainexercise/',passingSignExercise),
+    path('adminmainexercise/',adminSignExercise),
     path('super-up-plan-admin/', admin.site.urls),
     path('setting/',include("web.urls")),
     path('api/ita/v1/',include("ita.api.urls")),  
