@@ -27,7 +27,7 @@ SECRET_KEY = 'byjn@0y2kq_8ia3-q@%+e3ytkpqu12=n=zm^tocmwd8umin=(2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1","171.5.50.132"]
+ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1"]
 
 
 # Application definition
@@ -50,8 +50,10 @@ INSTALLED_APPS = [
     'iit',
     'eit',
     'report',
-    'frontend',
     'web',
+    'django_json_widget',
+    'oit',
+    'frontend',
     'rest_auth',
     'drf_generators',
     'import_export',
@@ -59,7 +61,6 @@ INSTALLED_APPS = [
     'jsoneditor',
     'django.contrib.sites',
     'django_admin_multiple_choice_list_filter',
-    'django_json_widget',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
@@ -97,8 +98,7 @@ REST_FRAMEWORK = {
 #    ),
    
 }
-JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.js'
-JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.css'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -116,7 +116,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'upita_servers.wsgi.application'
-
+JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.js'
+JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.css'
 X_FRAME_OPTIONS='SAMEORIGIN' 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -128,7 +129,7 @@ DATABASES = {
         'NAME': 'upita',
         'USER': 'root',
         # 'PASSWORD': 'P@$$w0rd1234',
-        'PASSWORD': '',
+        'PASSWORD': 'Up2021',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -136,31 +137,32 @@ DATABASES = {
         },
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
 REST_REGISTRATION = {
     'REGISTER_VERIFICATION_ENABLED': False,
     'RESET_PASSWORD_VERIFICATION_ENABLED': False,
     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
 }
+AUTH_PASSWORD_VALIDATORS = []
 
+# Password validation
+# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+  #  {
+  #       'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+  #   },
+  #   {
+ #        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+  #   },
+  #   {
+  #       'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+  #   },
+]
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -179,13 +181,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
  
  
-if DEBUG:
-     STATICFILES_DIRS = [
-            os.path.join(BASE_DIR, 'static')
-    ]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 MEDIA_URL= "/media/"
+
+# MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+# MEDIA_URL= "/media/"

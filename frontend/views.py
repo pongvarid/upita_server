@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from requests import auth
 
-login_valid = 'root'
-pwd_valid = 'root'
+login_valid = 'admin.2022'
+pwd_valid = 'admin.2022.up'
 
 def index(req):
     return render(req,'index.html')

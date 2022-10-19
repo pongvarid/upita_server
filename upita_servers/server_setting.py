@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from theme import JAZZMIN_SETTINGS
 from pathlib import Path
 import os
 
@@ -27,13 +27,13 @@ SECRET_KEY = 'byjn@0y2kq_8ia3-q@%+e3ytkpqu12=n=zm^tocmwd8umin=(2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["192.168.1.112","localhost","127.0.0.1","171.5.50.132"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
- 
+    'jazzmin',
     'django.contrib.admin',
     #  'admin_interface', 
     'django.contrib.auth',
@@ -50,15 +50,16 @@ INSTALLED_APPS = [
     'iit',
     'eit',
     'report',
-    'web',
-    'django_json_widget',
-    'oit',
     'frontend',
+    'web',
+    'oit',
+    'moral_organization',
+  
     'rest_auth',
     'drf_generators',
     'import_export',
     'reversion',
-    'jsoneditor',
+  
     'django.contrib.sites',
     'django_admin_multiple_choice_list_filter',
     'allauth',
@@ -72,8 +73,10 @@ INSTALLED_APPS = [
 ]
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+JSIGNATURE_WIDTH = 500
+JSIGNATURE_HEIGHT = 200
+JSIGNATURE_JQUERY = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -98,7 +101,8 @@ REST_FRAMEWORK = {
 #    ),
    
 }
-
+JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.js'
+JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.css'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -116,8 +120,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'upita_servers.wsgi.application'
-JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.js'
-JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.css'
+
 X_FRAME_OPTIONS='SAMEORIGIN' 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -129,20 +132,16 @@ DATABASES = {
         'NAME': 'upita',
         'USER': 'root',
         # 'PASSWORD': 'P@$$w0rd1234',
-        'PASSWORD': 'Up2021',
+        #'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
+        'PASSWORD':'Up2021',
         'OPTIONS': {
             "init_command": "SET foreign_key_checks = 0;",
         },
     }
 }
-REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_ENABLED': False,
-    'RESET_PASSWORD_VERIFICATION_ENABLED': False,
-    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
-}
-AUTH_PASSWORD_VALIDATORS = []
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -151,18 +150,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-  #  {
-  #       'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-  #   },
-  #   {
- #        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-  #   },
-  #   {
-  #       'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-  #   },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': False,
+    'RESET_PASSWORD_VERIFICATION_ENABLED': False,
+    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+}
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -180,11 +183,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
  
- 
+  
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  
+
+
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 MEDIA_URL= "/media/"
-
-# MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
-# MEDIA_URL= "/media/"
