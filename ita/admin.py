@@ -39,13 +39,14 @@ class AgencyChangeAdmin(admin.ModelAdmin):
 admin.site.register(AgencyChange,AgencyChangeAdmin)
 
 class RateAdmin(admin.ModelAdmin): 
-    list_display = ('number','type_base','type','name','detail','year','created_at')
+    list_display = ('number','name','type_base','type','type_sub','detail','year','created_at')
     # list_editable = ('type_base',)
-    list_filter = (
-        ('year', RelatedDropdownFilter),
-        ('type_base', DropdownFilter),
-        ('type', DropdownFilter),
-        ('number', DropdownFilter),
+    list_filter = ( 
+        'year' ,
+        'type_base', 
+        'type' ,
+        'type_sub',
+        'number' 
     )
 
     search_fields = ['name','number','type']

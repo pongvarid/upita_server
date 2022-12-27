@@ -31,6 +31,7 @@ class Rate(models.Model):
     year = models.ForeignKey(Year, on_delete=models.CASCADE,verbose_name="ประจำปี")
     type_base = models.CharField(max_length=255,choices=ANSWERS, blank=True, null=True, verbose_name="ประเภทตัวชี้วัด")
     type = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภท")
+    type_sub = models.CharField(max_length=255, blank=True, null=True, verbose_name="ประเภทย่อย")
     name = models.CharField(max_length=255,verbose_name="หัวข้อ")
     detail = models.TextField(verbose_name="รายระเอียด")
 
