@@ -144,7 +144,10 @@ class AnswerIssueEit(models.Model):
 
     @property
     def user_name(self):
-        return self.user.first_name + " " + self.user.last_name
+        try:
+            return self.user.first_name + " " + self.user.last_name
+        except:
+            return self.name + " (" + self.phone_number + ") "
 
     @property
     def assessmentIssues_name(self):
@@ -152,7 +155,10 @@ class AnswerIssueEit(models.Model):
 
     @property
     def user_email(self):
-        return self.user.email
+        try:
+            return self.user.email
+        except:
+            return "-"
 
     @property
     def issue_name(self):
@@ -175,7 +181,9 @@ class AnswerSuggestionEit(models.Model):
     class Meta:
         verbose_name = _("การตอบข้อเสนอแนะ")
         verbose_name_plural = _("การตอบข้อเสนอแนะ")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True, blank=True, verbose_name="ชื่อผู้ประเมิน")
+    phone_number = models.CharField(max_length=200, null=True, blank=True, verbose_name="เบอร์โทรผู้ประะเมิน")
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
     suggestion = models.CharField(max_length=255,null=True,blank=True,)
@@ -188,9 +196,16 @@ class AnswerSuggestionEit(models.Model):
 
     @property
     def user_name(self):
-        return self.user.first_name + " " + self.user.last_name
+        try:
+            return self.user.first_name + " " + self.user.last_name
+        except:
+            return self.name + " ("+self.phone_number+") "
+
 
     @property
     def user_email(self):
-        return self.user.email
+       try:
+           return self.user.email
+       except:
+           return "-"
 
