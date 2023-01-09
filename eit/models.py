@@ -120,7 +120,9 @@ class AnswerIssueEit(models.Model):
     class Meta:
         verbose_name = _("การตอบแบบประเมิน")
         verbose_name_plural = _("การตอบแบบประเมิน")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True, blank=True, verbose_name="ชื่อผู้ประเมิน")
+    phone_number = models.CharField(max_length=200, null=True, blank=True, verbose_name="เบอร์โทรผู้ประะเมิน")
     assessmentIssues = models.ForeignKey(AssessmentIssues, on_delete=models.CASCADE)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
