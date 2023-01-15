@@ -136,7 +136,7 @@ class AnswerIssueEit(models.Model):
 
     @property
     def agency_name(self):
-        return "( i" + str(self.issue.order) + ") " + self.agency.name
+        return "( e" + str(self.issue.order) + ") " + self.agency.name
 
     @property
     def issueDetail_name(self):
@@ -162,7 +162,7 @@ class AnswerIssueEit(models.Model):
 
     @property
     def issue_name(self):
-        return "( i" + str(self.issue.order) + ") " + self.issue.name
+        return "( e" + str(self.issue.order) + ") " + self.issue.name
 
     @property
     def choiceTypeData(self):

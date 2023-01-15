@@ -65,10 +65,34 @@ class AnswerIssueAdmin(admin.ModelAdmin):
     list_display = ( 'agency_name','assessmentIssues_name','issue_name','issueDetail_name','value','user_name','user_email')
     # list_filter = ('agency','assessmentIssues','issue')
     list_filter = (
-        ('agency', RelatedOnlyDropdownFilter),
-        ('assessmentIssues',RelatedOnlyDropdownFilter),
-        ('issue', RelatedOnlyDropdownFilter),
-        ('year',DropdownFilter),)
+        ('agency'),
+        ('assessmentIssues'),
+        ('issue'),
+        ('year'),)
+    def changelist_view(self, request, extra_context=None):
+        default_filter = False
+
+        try:
+            ref = request.META['HTTP_REFERER']
+            pinfo = request.META['PATH_INFO']
+            qstr = ref.split(pinfo)
+            querystr = request.META['QUERY_STRING']
+
+            # Check the QUERY_STRING value, otherwise when
+            # trying to filter the filter gets reset below
+            if querystr is None:
+                if len(qstr) < 2 or qstr[1] == '':
+                    default_filter = True
+        except:
+            default_filter = True
+
+        if default_filter:
+            q = request.GET.copy()
+            q['year__id__exact'] = '4'
+            request.GET = q
+            request.META['QUERY_STRING'] = request.GET.urlencode()
+
+        return super(AnswerIssueAdmin, self).changelist_view(request, extra_context=extra_context)
 
 admin.site.register(AnswerIssueEit,AnswerIssueAdmin)
 
@@ -80,8 +104,32 @@ class AnswerSuggestionAdmin(admin.ModelAdmin):
     # ordering = ('issue__order',)
     list_display = ( 'agency_name' ,'user_name','suggestion', 'year','user_email')
     list_filter = (
-        ('agency', RelatedOnlyDropdownFilter),
-        ('year',DropdownFilter),)
+        ('agency'),
+        ('year'),)
+    def changelist_view(self, request, extra_context=None):
+        default_filter = False
+
+        try:
+            ref = request.META['HTTP_REFERER']
+            pinfo = request.META['PATH_INFO']
+            qstr = ref.split(pinfo)
+            querystr = request.META['QUERY_STRING']
+
+            # Check the QUERY_STRING value, otherwise when
+            # trying to filter the filter gets reset below
+            if querystr is None:
+                if len(qstr) < 2 or qstr[1] == '':
+                    default_filter = True
+        except:
+            default_filter = True
+
+        if default_filter:
+            q = request.GET.copy()
+            q['year__id__exact'] = '4'
+            request.GET = q
+            request.META['QUERY_STRING'] = request.GET.urlencode()
+
+        return super(AnswerSuggestionAdmin, self).changelist_view(request, extra_context=extra_context)
 admin.site.register(AnswerSuggestionEit,AnswerSuggestionAdmin)
 
 
@@ -110,8 +158,8 @@ class ReportAgencyEitAdmin(ImportExportModelAdmin):
     list_display = ('name','tel','email','type','agency', 'year'  )
     # list_filter = ('year', 'type', 'agency')
     list_filter = (
-        ('agency', RelatedDropdownFilter),
-        ('year', RelatedDropdownFilter),
-        ('type', DropdownFilter),
+        ('agency'),
+        ('year'),
+        ('type'),
     )
 admin.site.register(ReportAgencyEit,ReportAgencyEitAdmin)
