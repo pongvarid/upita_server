@@ -50,6 +50,7 @@ class RateAdmin(admin.ModelAdmin):
     )
 
     search_fields = ['name','number','type']
+    list_editable = ['type_base', 'type', 'type_sub']
 admin.site.register(Rate,RateAdmin)
 
 admin.site.register(RateStatus)
@@ -58,6 +59,7 @@ class RateResultAdmin(admin.ModelAdmin):
     list_display = ('number','rate','rate_status','register_type','urls','agency','score','tester','passing','created_at') 
     list_filter = ('rate','agency','rate__year','passing')
     search_fields = ['rate__number','rate__name']
+
 admin.site.register(RateResult,RateResultAdmin)
 
 class UserProfileInline(admin.StackedInline):
@@ -100,11 +102,11 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('full_name','user_email','agency','register_type','status','passing','in_up','oit')
     # list_filter = ('agency','passing','status','in_up')
     list_filter = (
-        ('agency', RelatedOnlyDropdownFilter),
+        ('agency'),
         'in_up',
         'register_type'
     )
-    list_editable = ('agency',)
+    # list_editable = ('agency',)
     class Media:
         js = ('multi_line_list_edit.js',)
 admin.site.register(Profile,UserAdmin)
