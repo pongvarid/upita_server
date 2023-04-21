@@ -8,6 +8,9 @@ from requests import auth
 login_valid = 'admin.2022'
 pwd_valid = 'admin.2022.up'
 
+def close(req):
+    return render(req,'close.html')
+
 def index(req):
     return render(req,'index.html')
 

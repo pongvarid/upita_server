@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static 
-from frontend.views import index, authenticatePlan, editPlan, passingSignExercise, adminSignExercise
+from frontend.views import index,close, authenticatePlan, editPlan, passingSignExercise, adminSignExercise
 from django.urls import re_path
 urlpatterns = [
    
@@ -39,9 +39,11 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('rest_registration.api.urls')),
     path('api/moral_organization/', include('moral_organization.api_urls')),
-    path('', index),
+    # path('', index),
+    path('',close)
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 urlpatterns += [
-     re_path('^.*$',index),
+    #  re_path('^.*$',index),
+       re_path('^.*$',close),
  ]

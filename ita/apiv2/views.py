@@ -427,11 +427,11 @@ class Dashbord(APIView):
     def get(self, request,pk, format=None):
         user = Profile.objects.get(pk=pk)
         agency = Agency.objects.get(pk=user.agency_id)
-        profile = Profile.objects.filter(agency__id=agency.id,passing=False)
-        passing = Profile.objects.filter(agency__id=agency.id,passing=True)
+        profile = Profile.objects.filter(agency__id=agency.id,passing=False,status=True)
+        passing = Profile.objects.filter(agency__id=agency.id,passing=True,status=True)
         response = {
             "agency":agency.name,
-            "agency_user": len(profile),
+            "agency_user": agency.count,
             "agency_passing": len(passing),
             "agency_user_all": ProfileDashboardSerializer(profile,many=True).data,
             "agency_passing_all" :ProfileDashboardSerializer(passing,many=True).data 
