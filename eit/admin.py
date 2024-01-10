@@ -26,9 +26,10 @@ class AssessmentIssuesAdmin(admin.ModelAdmin):
     # search_fields = ['name','farm__name',]
     # autocomplete_fields = ['name',]
     list_filter = ('year',)
-    ordering = ('order',)
+    ordering = ('-year', 'order',)
     list_display = ('name','order','year',)
     search_fields = ('name',)
+    list_editable = ['order']
 admin.site.register(AssessmentIssues,AssessmentIssuesAdmin)
 
 

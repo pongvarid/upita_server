@@ -17,9 +17,10 @@ class AssessmentIssuesAdmin(admin.ModelAdmin):
     # search_fields = ['name','farm__name',]
     # autocomplete_fields = ['name',]
     list_filter = ('year',)
-    ordering = ('order',)
+    ordering = ('-year', 'order',)
     list_display = ('name','order','year')
     search_fields = ('name',)
+    list_editable = ['order']
 admin.site.register(AssessmentIssues,AssessmentIssuesAdmin)
 
 
@@ -42,8 +43,8 @@ class IssueAdmin(admin.ModelAdmin):
     # list_filter = ('assessment__year','assessment',)
 
     list_filter = (
-        # for ordinary fields
-        ('assessment__year', RelatedDropdownFilter),
+        ("assessment__year"),
+        # ('assessment__year', RelatedDropdownFilter),
         # for choice fields
         ('assessment', RelatedDropdownFilter),
     )
@@ -171,5 +172,7 @@ admin.site.register(UserInAnswer,UserInAnswerAdmin)
 class IssueDetailadmin(admin.ModelAdmin):
     search_fields = [ 'sub_name',]
     list_display = ( 'sub_name' ,'choiceType', 'choiceTypeData','created_at')
-    list_filter = ('issue',)
+    list_filter = ('issue', 'issue__assessment__year',)
+ 
+
 admin.site.register(IssueDetail,IssueDetailadmin)
