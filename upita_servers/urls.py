@@ -39,11 +39,11 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('rest_registration.api.urls')),
     path('api/moral_organization/', include('moral_organization.api_urls')),
-    # path('', index),
-    path('',close)
+    path('', index),
+    # path('',close)
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 urlpatterns += [
-    #  re_path('^.*$',index),
-       re_path('^.*$',close),
+     re_path('^.*$',index),
+    #    re_path('^.*$',close),
  ]

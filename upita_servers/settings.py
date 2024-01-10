@@ -69,8 +69,15 @@ INSTALLED_APPS = [
     'django_filters',
     'django_property_filter',
     'django_admin_listfilter_dropdown',
+     'dbbackup',
  
 ]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {
+    'location': os.path.join(BASE_DIR, 'backup')
+}
+
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
@@ -126,7 +133,7 @@ X_FRAME_OPTIONS='SAMEORIGIN'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
+           # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'upita',
