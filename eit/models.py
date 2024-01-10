@@ -39,10 +39,12 @@ class Ascend(Choice):
     class Meta:
         verbose_name = _("ตัวเลือกแบบ น้อยที่สุด-มากที่สุด")
         verbose_name_plural = _("ตัวเลือกแบบ น้อยที่สุด-มากที่สุด")
-    notting = models.FloatField(default=0.00,verbose_name="น้อยที่สุดหรือไม่มีเลย")
-    low = models.FloatField(default=0.00,verbose_name="น้อย")
-    very = models.FloatField(default=0.00,verbose_name="มาก")
-    many = models.FloatField(default=0.00,verbose_name="มากที่สุด")
+    nottingest = models.FloatField(default=0.00, verbose_name="น้อยที่สุดหรือไม่มีเลย")
+    notting = models.FloatField(default=0.00, verbose_name="น้อยมาก")
+    low = models.FloatField(default=0.00, verbose_name="น้อย")
+    very = models.FloatField(default=0.00, verbose_name="มาก")
+    many = models.FloatField(default=0.00, verbose_name="มากพอสมควร")
+    manyest = models.FloatField(default=0.00, verbose_name="มากที่สุดที่สุดหรือไม่มีเลย")
 
 class Exist(Choice):
     class Meta:
